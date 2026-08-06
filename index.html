@@ -758,8 +758,21 @@
       document.getElementById('updateTime').textContent = now.toLocaleString('zh-CN');
     }
     updateTime(); setInterval(updateTime, 1000);
-    renderMeetingReminders();
 
+    // ===== Meeting Reminders Data (must be defined BEFORE rendering) =====
+    var meetingReminders = [
+      {date:'8月5日', title:'月度经营分析会', info:'第二会议室 · 全体高管', tag:'meeting', urgent:true},
+      {date:'8月5日', title:'安全生产专项检查', info:'城北客运站现场检查', tag:'event', urgent:true},
+      {date:'8月8日', title:'便民快巴运营周会', info:'5条线路数据复盘', tag:'meeting', urgent:false},
+      {date:'8月10日', title:'驾驶员安全培训考核', info:'年度安全考核截止', tag:'deadline', urgent:false},
+      {date:'8月12日', title:'新能源车辆采购评审', info:'30辆纯电动客车评标', tag:'event', urgent:false},
+      {date:'8月15日', title:'半年度经营报告提交', info:'向国资委提交报告', tag:'deadline', urgent:false},
+      {date:'8月18日', title:'股东名册月度更新', info:'更新7月股东变动', tag:'event', urgent:false},
+      {date:'8月22日', title:'季度董事会', info:'审议Q3财务及投资', tag:'meeting', urgent:false},
+      {date:'8月25日', title:'8月营收结算', info:'各线路营收汇总', tag:'deadline', urgent:false}
+    ];
+    var tagNames = {meeting:'会议', event:'事项', deadline:'截止'};
+    renderMeetingReminders();
 
     // Chengdu weather (Open-Meteo free API)
     const WMO = {
@@ -829,6 +842,7 @@
 
     function renderForecast() {
       const list = document.getElementById('forecastList');
+      if (!forecastData || forecastData.length === 0) { list.innerHTML = '<div style="color:#5a7090;padding:20px;text-align:center;">天气数据加载中，请稍后…</div>'; return; }
       const today = new Date().toISOString().slice(0,10);
       // Find global min/max for temperature bar scale
       const allTemps = forecastData.flatMap(d => [d.min, d.max]);
@@ -1138,20 +1152,6 @@
     }
 
     // ===== Meeting Reminders (Header Widget) =====
-    var meetingReminders = [
-      {date:'8月5日', title:'月度经营分析会', info:'第二会议室 · 全体高管', tag:'meeting', urgent:true},
-      {date:'8月5日', title:'安全生产专项检查', info:'城北客运站现场检查', tag:'event', urgent:true},
-      {date:'8月8日', title:'便民快巴运营周会', info:'5条线路数据复盘', tag:'meeting', urgent:false},
-      {date:'8月10日', title:'驾驶员安全培训考核', info:'年度安全考核截止', tag:'deadline', urgent:false},
-      {date:'8月12日', title:'新能源车辆采购评审', info:'30辆纯电动客车评标', tag:'event', urgent:false},
-      {date:'8月15日', title:'半年度经营报告提交', info:'向国资委提交报告', tag:'deadline', urgent:false},
-      {date:'8月18日', title:'股东名册月度更新', info:'更新7月股东变动', tag:'event', urgent:false},
-      {date:'8月22日', title:'季度董事会', info:'审议Q3财务及投资', tag:'meeting', urgent:false},
-      {date:'8月25日', title:'8月营收结算', info:'各线路营收汇总', tag:'deadline', urgent:false}
-    ];
-
-    var tagNames = {meeting:'会议', event:'事项', deadline:'截止'};
-
     function renderMeetingReminders() {
       var container = document.getElementById('headerMeetings');
       if (!container) return;
