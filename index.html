@@ -62,6 +62,7 @@
     .forecast-day .fd-temps .lo { color: #6a80a0; margin-left: 10px; }
     .forecast-day .fd-rain { font-size: 13px; color: #4a90d0; min-width: 60px; text-align: right; }
     .forecast-day .fd-rain.dry { color: #3a5060; }
+    .forecast-day .fd-desc { font-size: 13px; color: #6a90c0; min-width: 64px; white-space: nowrap; }
     .forecast-day .fd-bar { flex: 1; height: 4px; background: rgba(60,90,160,0.15); border-radius: 2px; position: relative; overflow: hidden; }
     .forecast-day .fd-bar-fill { height: 100%; border-radius: 2px; position: absolute; left: 0; top: 0; background: linear-gradient(90deg, #4a80d0, #e06060); }
     .forecast-close, .calendar-close { position: absolute; top: 12px; right: 16px; background: none; border: none; color: #5a7090; font-size: 22px; cursor: pointer; line-height: 1; z-index: 2; }
@@ -116,19 +117,21 @@
     .header-center .date { font-size: 14px; color: #5a70a0; margin-top: 2px; }
     .header-right { display: flex; gap: 22px; align-items: center; }
     /* Compact meeting widget in header */
-    .header-meetings { display: flex; align-items: center; gap: 8px; overflow-x: auto; max-width: 420px; padding: 4px 0; scrollbar-width: none; }
+    .header-meetings { display: flex; align-items: center; gap: 10px; overflow-x: auto; max-width: 460px; padding: 4px 0; scrollbar-width: none; cursor: pointer; }
     .header-meetings::-webkit-scrollbar { display: none; }
     .header-meetings::-webkit-scrollbar { height: 0; }
-    .hdr-meeting-item { background: rgba(20,40,80,0.55); border: 1px solid rgba(60,120,220,0.18); border-radius: 6px; padding: 3px 10px; white-space: nowrap; cursor: pointer; transition: all 0.2s; flex-shrink: 0; display: flex; align-items: center; gap: 5px; }
-    .hdr-meeting-item:hover { background: rgba(30,60,120,0.35); border-color: rgba(74,144,226,0.4); }
-    .hdr-meeting-item.urgent { border-left: 2px solid #e04040; }
-    .hdr-meeting-item .hdr-mt-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+    .hdr-meeting-item { background: rgba(20,40,80,0.7); border: 1px solid rgba(60,120,220,0.22); border-radius: 8px; padding: 6px 12px; white-space: nowrap; cursor: pointer; transition: all 0.2s; flex-shrink: 0; display: flex; flex-direction: column; gap: 3px; min-width: 100px; }
+    .hdr-meeting-item:hover { background: rgba(30,60,120,0.4); border-color: rgba(74,144,226,0.5); transform: translateY(-1px); }
+    .hdr-meeting-item.urgent { border-left: 3px solid #e04040; }
+    .hdr-meeting-item .hdr-mt-top { display: flex; align-items: center; gap: 5px; }
+    .hdr-meeting-item .hdr-mt-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
     .hdr-meeting-item .hdr-mt-dot.meeting { background: #4a90e2; }
     .hdr-meeting-item .hdr-mt-dot.event { background: #f0a030; }
     .hdr-meeting-item .hdr-mt-dot.deadline { background: #e04040; }
     .hdr-meeting-item .hdr-mt-date { font-size: 11px; color: #5a7090; }
-    .hdr-meeting-item .hdr-mt-title { font-size: 13px; color: #b0c8f0; font-weight: 500; }
-    .hdr-mt-divider { width: 1px; height: 18px; background: rgba(60,120,220,0.15); flex-shrink: 0; margin: 0 2px; }
+    .hdr-meeting-item .hdr-mt-title { font-size: 13px; color: #b0c8f0; font-weight: 600; }
+    .hdr-meeting-item .hdr-mt-tag { font-size: 10px; color: #4a6080; margin-top: 1px; }
+    .hdr-mt-divider { width: 1px; height: 24px; background: rgba(60,120,220,0.18); flex-shrink: 0; margin: 0 2px; }
     .stat-chip { text-align: right; }
     .stat-chip .label { font-size: 13px; color: #5a70a0; letter-spacing: 1px; }
     .stat-chip .value { font-size: 18px; font-weight: 700; color: #a0bcf0; }
@@ -362,7 +365,61 @@
   </div>
 
   <div class="main">
-    <!-- Row 1: Revenue span2 + 便民快巴 span1 -->
+    <!-- Row 1: 股东结构 span2 + 员工概况 -->
+    <div class="card span2">
+      <div class="card-header">
+        <div class="card-title">股东结构</div>
+        <span class="card-badge">数据来源：2026年7月28日股东名册</span>
+      </div>
+      <div class="card-body">
+        <div class="shareholder-kpi-grid" style="grid-template-columns:repeat(4,1fr);">
+          <div class="shareholder-kpi"><div class="num">2,151<span style="font-size:16px">人</span></div><div class="lbl">股东总人数</div></div>
+          <div class="shareholder-kpi"><div class="num">13,816.13<span style="font-size:16px">万元</span></div><div class="lbl">总股本</div></div>
+          <div class="shareholder-kpi"><div class="num">336<span style="font-size:16px">人</span></div><div class="lbl">在岗合计（中高层+科级+员工）</div></div>
+          <div class="shareholder-kpi"><div class="num">1,520<span style="font-size:16px">人</span></div><div class="lbl">退休·退养合计</div></div>
+        </div>
+        <div style="font-size:14px;color:#5a7090;margin-bottom:8px;letter-spacing:1px;">股东类别构成 · 总股本 ¥13,816.13万元</div>
+        <table class="shareholder-table">
+          <thead><tr><th>类别</th><th style="text-align:right">人数</th><th style="text-align:right">股本（万元）</th><th style="text-align:right">占比</th></tr></thead>
+          <tbody>
+            <tr style="background:rgba(40,100,200,0.08);"><td style="color:#4a90e2;font-weight:600;">中、高层管理人员</td><td style="text-align:right">67</td><td style="text-align:right">2,403.70</td><td style="text-align:right;color:#c0a040">17.40%</td></tr>
+            <tr style="background:rgba(40,100,200,0.04);"><td style="color:#5090c8;">科级管理人员</td><td style="text-align:right">103</td><td style="text-align:right">626.38</td><td style="text-align:right;color:#c0a040">4.53%</td></tr>
+            <tr><td style="color:#5090c8;">员工</td><td style="text-align:right">166</td><td style="text-align:right">579.74</td><td style="text-align:right;color:#c0a040">4.20%</td></tr>
+            <tr style="background:rgba(200,216,248,0.06);"><td style="color:#c8d8f8;font-weight:600;">退休</td><td style="text-align:right">1,504</td><td style="text-align:right">8,913.11</td><td style="text-align:right;color:#c0a040">64.51%</td></tr>
+            <tr style="background:rgba(200,216,248,0.03);"><td style="color:#a0b0d0;">退养</td><td style="text-align:right">16</td><td style="text-align:right">179.80</td><td style="text-align:right;color:#c0a040">1.30%</td></tr>
+            <tr style="background:rgba(160,128,224,0.08);"><td style="color:#b080e0;font-weight:600;">继承</td><td style="text-align:right">133</td><td style="text-align:right">676.16</td><td style="text-align:right;color:#c0a040">4.89%</td></tr>
+            <tr style="background:rgba(224,96,112,0.06);"><td style="color:#e06070;font-weight:600;">离职</td><td style="text-align:right">158</td><td style="text-align:right">431.62</td><td style="text-align:right;color:#c0a040">3.12%</td></tr>
+            <tr style="background:rgba(224,96,112,0.03);"><td style="color:#d08080;">死亡</td><td style="text-align:right">4</td><td style="text-align:right">5.62</td><td style="text-align:right;color:#c0a040">0.04%</td></tr>
+            <tr style="border-top:1px solid rgba(60,120,220,0.3);font-weight:700;"><td style="color:#e0e8f8;">合计</td><td style="text-align:right;color:#e0e8f8;">2,151</td><td style="text-align:right;color:#e0e8f8;">13,816.13</td><td style="text-align:right;color:#f0a030;">100.00%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">员工概况</div>
+        <span class="card-badge">在职 3,850 人</span>
+      </div>
+      <div class="card-body">
+        <div class="employee-breakdown">
+          <div class="employee-chart-wrap"><canvas id="employeeChart"></canvas></div>
+          <div class="employee-legend">
+            <div class="employee-legend-item"><span class="employee-legend-dot" style="background:#4a90e2"></span><span class="employee-legend-name">驾驶员</span><span class="employee-legend-val">1,830人</span></div>
+            <div class="employee-legend-item"><span class="employee-legend-dot" style="background:#50c8a0"></span><span class="employee-legend-name">站务/票务</span><span class="employee-legend-val">820人</span></div>
+            <div class="employee-legend-item"><span class="employee-legend-dot" style="background:#c0a040"></span><span class="employee-legend-name">管理人员</span><span class="employee-legend-val">560人</span></div>
+            <div class="employee-legend-item"><span class="employee-legend-dot" style="background:#e06070"></span><span class="employee-legend-name">维修/技术</span><span class="employee-legend-val">410人</span></div>
+            <div class="employee-legend-item"><span class="employee-legend-dot" style="background:#a080d0"></span><span class="employee-legend-name">其他（后勤等）</span><span class="employee-legend-val">230人</span></div>
+          </div>
+        </div>
+        <div style="margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:14px;">
+          <div style="background:rgba(20,32,60,0.4);border-radius:6px;padding:6px 8px;"><span style="color:#5a7090">平均年龄</span><br><span style="color:#a0bcf0;font-weight:700;font-size:18px;">42.3<span style="font-size:13px"> 岁</span></span></div>
+          <div style="background:rgba(20,32,60,0.4);border-radius:6px;padding:6px 8px;"><span style="color:#5a7090">大专以上</span><br><span style="color:#a0bcf0;font-weight:700;font-size:18px;">38.6<span style="font-size:13px">%</span></span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 2: 便民快巴营收 span2 + 运营监控 -->
     <div class="card span2">
       <div class="card-header">
         <div class="card-title">便民快巴 · 营收概览</div>
@@ -414,120 +471,110 @@
       </div>
     </div>
 
-    <!-- Row 2: Employee span1 + Shareholder span2 -->
+    <!-- Row 3: 定制客运营收 + 营运监控 -->
     <div class="card">
       <div class="card-header">
-        <div class="card-title">员工概况</div>
-        <span class="card-badge">在职 3,850 人</span>
-      </div>
-      <div class="card-body">
-        <div class="employee-breakdown">
-          <div class="employee-chart-wrap"><canvas id="employeeChart"></canvas></div>
-          <div class="employee-legend">
-            <div class="employee-legend-item"><span class="employee-legend-dot" style="background:#4a90e2"></span><span class="employee-legend-name">驾驶员</span><span class="employee-legend-val">1,830人</span></div>
-            <div class="employee-legend-item"><span class="employee-legend-dot" style="background:#50c8a0"></span><span class="employee-legend-name">站务/票务</span><span class="employee-legend-val">820人</span></div>
-            <div class="employee-legend-item"><span class="employee-legend-dot" style="background:#c0a040"></span><span class="employee-legend-name">管理人员</span><span class="employee-legend-val">560人</span></div>
-            <div class="employee-legend-item"><span class="employee-legend-dot" style="background:#e06070"></span><span class="employee-legend-name">维修/技术</span><span class="employee-legend-val">410人</span></div>
-            <div class="employee-legend-item"><span class="employee-legend-dot" style="background:#a080d0"></span><span class="employee-legend-name">其他（后勤等）</span><span class="employee-legend-val">230人</span></div>
-          </div>
-        </div>
-        <div style="margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:14px;">
-          <div style="background:rgba(20,32,60,0.4);border-radius:6px;padding:6px 8px;"><span style="color:#5a7090">平均年龄</span><br><span style="color:#a0bcf0;font-weight:700;font-size:18px;">42.3<span style="font-size:13px"> 岁</span></span></div>
-          <div style="background:rgba(20,32,60,0.4);border-radius:6px;padding:6px 8px;"><span style="color:#5a7090">大专以上</span><br><span style="color:#a0bcf0;font-weight:700;font-size:18px;">38.6<span style="font-size:13px">%</span></span></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="card span2">
-      <div class="card-header">
-        <div class="card-title">股东结构</div>
-        <span class="card-badge">数据来源：2026年7月28日股东名册</span>
-      </div>
-      <div class="card-body">
-        <div class="shareholder-kpi-grid" style="grid-template-columns:repeat(4,1fr);">
-          <div class="shareholder-kpi"><div class="num">2,151<span style="font-size:16px">人</span></div><div class="lbl">股东总人数</div></div>
-          <div class="shareholder-kpi"><div class="num">13,816.13<span style="font-size:16px">万元</span></div><div class="lbl">总股本</div></div>
-          <div class="shareholder-kpi"><div class="num">336<span style="font-size:16px">人</span></div><div class="lbl">在岗合计（中高层+科级+员工）</div></div>
-          <div class="shareholder-kpi"><div class="num">1,520<span style="font-size:16px">人</span></div><div class="lbl">退休·退养合计</div></div>
-        </div>
-        <div style="font-size:14px;color:#5a7090;margin-bottom:8px;letter-spacing:1px;">股东类别构成 · 总股本 ¥13,816.13万元</div>
-        <table class="shareholder-table">
-          <thead><tr><th>类别</th><th style="text-align:right">人数</th><th style="text-align:right">股本（万元）</th><th style="text-align:right">占比</th></tr></thead>
-          <tbody>
-            <tr style="background:rgba(40,100,200,0.08);"><td style="color:#4a90e2;font-weight:600;">中、高层管理人员</td><td style="text-align:right">67</td><td style="text-align:right">2,403.70</td><td style="text-align:right;color:#c0a040">17.40%</td></tr>
-            <tr style="background:rgba(40,100,200,0.04);"><td style="color:#5090c8;">科级管理人员</td><td style="text-align:right">103</td><td style="text-align:right">626.38</td><td style="text-align:right;color:#c0a040">4.53%</td></tr>
-            <tr><td style="color:#5090c8;">员工</td><td style="text-align:right">166</td><td style="text-align:right">579.74</td><td style="text-align:right;color:#c0a040">4.20%</td></tr>
-            <tr style="background:rgba(200,216,248,0.06);"><td style="color:#c8d8f8;font-weight:600;">退休</td><td style="text-align:right">1,504</td><td style="text-align:right">8,913.11</td><td style="text-align:right;color:#c0a040">64.51%</td></tr>
-            <tr style="background:rgba(200,216,248,0.03);"><td style="color:#a0b0d0;">退养</td><td style="text-align:right">16</td><td style="text-align:right">179.80</td><td style="text-align:right;color:#c0a040">1.30%</td></tr>
-            <tr style="background:rgba(160,128,224,0.08);"><td style="color:#b080e0;font-weight:600;">继承</td><td style="text-align:right">133</td><td style="text-align:right">676.16</td><td style="text-align:right;color:#c0a040">4.89%</td></tr>
-            <tr style="background:rgba(224,96,112,0.06);"><td style="color:#e06070;font-weight:600;">离职</td><td style="text-align:right">158</td><td style="text-align:right">431.62</td><td style="text-align:right;color:#c0a040">3.12%</td></tr>
-            <tr style="background:rgba(224,96,112,0.03);"><td style="color:#d08080;">死亡</td><td style="text-align:right">4</td><td style="text-align:right">5.62</td><td style="text-align:right;color:#c0a040">0.04%</td></tr>
-            <tr style="border-top:1px solid rgba(60,120,220,0.3);font-weight:700;"><td style="color:#e0e8f8;">合计</td><td style="text-align:right;color:#e0e8f8;">2,151</td><td style="text-align:right;color:#e0e8f8;">13,816.13</td><td style="text-align:right;color:#f0a030;">100.00%</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- Row 3: 定制客运 + 成运维修 + 物业管理 -->
-    <div class="card">
-      <div class="card-header">
-        <div class="card-title">定制客运 · 业务概览</div>
-        <span class="card-badge live">运营中</span>
+        <div class="card-title">定制客运 · 营收概览</div>
+        <span class="card-badge">2026年8月</span>
       </div>
       <div class="card-body">
         <div class="kpi-grid" style="grid-template-columns:1fr 1fr;">
+          <div class="kpi-item"><div class="kpi-label">本月营收</div><div class="kpi-value" style="font-size:22px;">168<span class="unit">万元</span></div><div class="kpi-change up">↑ 22.8%</div></div>
           <div class="kpi-item"><div class="kpi-label">运营线路</div><div class="kpi-value" style="font-size:22px;">8<span class="unit">条</span></div><div class="kpi-change">机场/企业/校园/景区</div></div>
           <div class="kpi-item"><div class="kpi-label">运营车辆</div><div class="kpi-value" style="font-size:22px;">36<span class="unit">辆</span></div><div class="kpi-change up">日均出车 30 辆</div></div>
-          <div class="kpi-item"><div class="kpi-label">本月营收</div><div class="kpi-value" style="font-size:22px;">168<span class="unit">万元</span></div><div class="kpi-change up">↑ 22.8%</div></div>
           <div class="kpi-item"><div class="kpi-label">月载客量</div><div class="kpi-value" style="font-size:22px;">2.4<span class="unit">万人次</span></div><div class="kpi-change up">↑ 18.5%</div></div>
         </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">定制客运 · 营运监控</div>
+        <span class="card-badge live">实时</span>
+      </div>
+      <div class="card-body">
         <div class="route-list">
           <div class="route-item"><div><div class="route-name">双流机场专线</div><div class="route-detail">日发18班 · 上座率82%</div></div><span class="route-status running">正常运行</span></div>
           <div class="route-item"><div><div class="route-name">企业通勤（高新）</div><div class="route-detail">6家企业 · 日均480人次</div></div><span class="route-status running">正常运行</span></div>
           <div class="route-item warning"><div><div class="route-name">校园巴士（温江）</div><div class="route-detail">5所高校 · 日均320人次</div></div><span class="route-status warning">暑期减班</span></div>
+          <div class="route-item"><div><div class="route-name">景区直通车（青城山）</div><div class="route-detail">日发6班 · 日均210人次</div></div><span class="route-status running">正常运行</span></div>
+        </div>
+        <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:14px;">
+          <div style="background:rgba(20,32,60,0.4);border-radius:6px;padding:8px 10px;"><span style="color:#5a7090">月发班次</span><br><span style="color:#a0bcf0;font-weight:700;font-size:20px;">1,080<span style="font-size:13px"> 班</span></span></div>
+          <div style="background:rgba(20,32,60,0.4);border-radius:6px;padding:8px 10px;"><span style="color:#5a7090">整体上座率</span><br><span style="color:#50c8a0;font-weight:700;font-size:20px;">79.6<span style="font-size:13px">%</span></span></div>
         </div>
       </div>
     </div>
 
+    <!-- Row 4: 成运维修营收 + 监控 -->
     <div class="card">
       <div class="card-header">
-        <div class="card-title">成运维修 · 业务概览</div>
+        <div class="card-title">成运维修 · 营收概览</div>
         <span class="card-badge">2026年8月</span>
       </div>
       <div class="card-body">
         <div class="kpi-grid" style="grid-template-columns:1fr 1fr;">
+          <div class="kpi-item"><div class="kpi-label">本月营收</div><div class="kpi-value" style="font-size:22px;">93<span class="unit">万元</span></div><div class="kpi-change up">↑ 12.6%</div></div>
           <div class="kpi-item"><div class="kpi-label">维修站点</div><div class="kpi-value" style="font-size:22px;">6<span class="unit">个</span></div><div class="kpi-change">覆盖主城区+郊县</div></div>
           <div class="kpi-item"><div class="kpi-label">月维修量</div><div class="kpi-value" style="font-size:22px;">1,280<span class="unit">台次</span></div><div class="kpi-change up">↑ 15.3%</div></div>
-          <div class="kpi-item"><div class="kpi-label">本月营收</div><div class="kpi-value" style="font-size:22px;">93<span class="unit">万元</span></div><div class="kpi-change up">↑ 12.6%</div></div>
-          <div class="kpi-item"><div class="kpi-label">客户满意度</div><div class="kpi-value" style="font-size:22px;">96.8<span class="unit">%</span></div><div class="kpi-change up">↑ 1.2%</div></div>
-        </div>
-        <div style="margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:14px;">
-          <div style="background:rgba(20,32,60,0.4);border-radius:6px;padding:8px 10px;"><span style="color:#5a7090">自有车辆维修</span><br><span style="color:#a0bcf0;font-weight:700;font-size:18px;">62<span style="font-size:13px">%</span></span></div>
-          <div style="background:rgba(20,32,60,0.4);border-radius:6px;padding:8px 10px;"><span style="color:#5a7090">对外维修</span><br><span style="color:#50c8a0;font-weight:700;font-size:18px;">38<span style="font-size:13px">%</span></span></div>
+          <div class="kpi-item"><div class="kpi-label">单车产值</div><div class="kpi-value" style="font-size:22px;">726<span class="unit">元</span></div><div class="kpi-change up">↑ 4.8%</div></div>
         </div>
       </div>
     </div>
 
     <div class="card">
       <div class="card-header">
-        <div class="card-title">物业管理 · 业务概览</div>
-        <span class="card-badge">2026年8月</span>
+        <div class="card-title">成运维修 · 运营监控</div>
+        <span class="card-badge live">实时</span>
       </div>
       <div class="card-body">
-        <div class="kpi-grid" style="grid-template-columns:1fr 1fr;">
-          <div class="kpi-item"><div class="kpi-label">管理面积</div><div class="kpi-value" style="font-size:22px;">8.6<span class="unit">万m²</span></div><div class="kpi-change">4处物业/3处场站</div></div>
-          <div class="kpi-item"><div class="kpi-label">出租率</div><div class="kpi-value" style="font-size:22px;">87.3<span class="unit">%</span></div><div class="kpi-change up">↑ 3.5%</div></div>
-          <div class="kpi-item"><div class="kpi-label">月租金收入</div><div class="kpi-value" style="font-size:22px;">126<span class="unit">万元</span></div><div class="kpi-change up">↑ 8.2%</div></div>
-          <div class="kpi-item"><div class="kpi-label">租户数</div><div class="kpi-value" style="font-size:22px;">47<span class="unit">户</span></div><div class="kpi-change">新增3户本月</div></div>
+        <div class="route-list">
+          <div class="route-item"><div><div class="route-name">城北维修中心</div><div class="route-detail">在修12台 · 待修8台</div></div><span class="route-status running">正常</span></div>
+          <div class="route-item"><div><div class="route-name">城南维修站</div><div class="route-detail">在修9台 · 待修3台</div></div><span class="route-status running">正常</span></div>
+          <div class="route-item"><div><div class="route-name">龙泉驿维修点</div><div class="route-detail">在修5台 · 待修2台</div></div><span class="route-status running">正常</span></div>
         </div>
-        <div style="margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:14px;">
-          <div style="background:rgba(20,32,60,0.4);border-radius:6px;padding:8px 10px;"><span style="color:#5a7090">商业租赁</span><br><span style="color:#c0a040;font-weight:700;font-size:18px;">52<span style="font-size:13px">%</span></span></div>
-          <div style="background:rgba(20,32,60,0.4);border-radius:6px;padding:8px 10px;"><span style="color:#5a7090">办公租赁</span><br><span style="color:#4a90e2;font-weight:700;font-size:18px;">48<span style="font-size:13px">%</span></span></div>
+        <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:14px;">
+          <div style="background:rgba(20,32,60,0.4);border-radius:6px;padding:8px 10px;"><span style="color:#5a7090">自有车辆</span><br><span style="color:#a0bcf0;font-weight:700;font-size:20px;">62<span style="font-size:13px">%</span></span></div>
+          <div style="background:rgba(20,32,60,0.4);border-radius:6px;padding:8px 10px;"><span style="color:#5a7090">客户满意度</span><br><span style="color:#50c8a0;font-weight:700;font-size:20px;">96.8<span style="font-size:13px">%</span></span></div>
         </div>
       </div>
     </div>
 
-    <!-- Row 4: News full-row -->
+    <!-- Row 5: 物业管理营收 + 监控 -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">物业管理 · 营收概览</div>
+        <span class="card-badge">2026年8月</span>
+      </div>
+      <div class="card-body">
+        <div class="kpi-grid" style="grid-template-columns:1fr 1fr;">
+          <div class="kpi-item"><div class="kpi-label">月租金收入</div><div class="kpi-value" style="font-size:22px;">126<span class="unit">万元</span></div><div class="kpi-change up">↑ 8.2%</div></div>
+          <div class="kpi-item"><div class="kpi-label">管理面积</div><div class="kpi-value" style="font-size:22px;">8.6<span class="unit">万m²</span></div><div class="kpi-change">4处物业/3处场站</div></div>
+          <div class="kpi-item"><div class="kpi-label">出租率</div><div class="kpi-value" style="font-size:22px;">87.3<span class="unit">%</span></div><div class="kpi-change up">↑ 3.5%</div></div>
+          <div class="kpi-item"><div class="kpi-label">年均坪效</div><div class="kpi-value" style="font-size:22px;">176<span class="unit">元/m²</span></div><div class="kpi-change up">↑ 5.1%</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">物业管理 · 运营监控</div>
+        <span class="card-badge live">实时</span>
+      </div>
+      <div class="card-body">
+        <div class="route-list">
+          <div class="route-item"><div><div class="route-name">总部办公楼</div><div class="route-detail">出租率92% · 18户</div></div><span class="route-status running">正常</span></div>
+          <div class="route-item"><div><div class="route-name">城北商业综合体</div><div class="route-detail">出租率84% · 22户</div></div><span class="route-status running">正常</span></div>
+          <div class="route-item"><div><div class="route-name">龙泉驿场站物业</div><div class="route-detail">出租率78% · 7户</div></div><span class="route-status running">正常</span></div>
+        </div>
+        <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:14px;">
+          <div style="background:rgba(20,32,60,0.4);border-radius:6px;padding:8px 10px;"><span style="color:#5a7090">商业租赁</span><br><span style="color:#c0a040;font-weight:700;font-size:20px;">52<span style="font-size:13px">%</span></span></div>
+          <div style="background:rgba(20,32,60,0.4);border-radius:6px;padding:8px 10px;"><span style="color:#5a7090">本月新增</span><br><span style="color:#50c8a0;font-weight:700;font-size:20px;">3<span style="font-size:13px"> 户</span></span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 6: 新闻 full-row -->
     <div class="card full-row">
       <div class="card-header">
         <div class="card-title">行业动态 · 新闻监控</div>
@@ -938,10 +985,13 @@
         }
         var item = document.createElement('div');
         item.className = 'hdr-meeting-item' + (r.urgent ? ' urgent' : '');
-        item.title = r.title + ' — ' + r.info + ' [' + tagNames[r.tag] + ']';
-        item.innerHTML = '<span class="hdr-mt-dot ' + r.tag + '"></span>' +
+        item.title = r.info + ' [' + tagNames[r.tag] + ']';
+        item.innerHTML = '<div class="hdr-mt-top">' +
+          '<span class="hdr-mt-dot ' + r.tag + '"></span>' +
           '<span class="hdr-mt-date">' + r.date + '</span>' +
-          '<span class="hdr-mt-title">' + r.title + '</span>';
+          '</div>' +
+          '<span class="hdr-mt-title">' + r.title + '</span>' +
+          '<span class="hdr-mt-tag">' + tagNames[r.tag] + '</span>';
         container.appendChild(item);
       });
       if (meetingReminders.length > maxShow) {
