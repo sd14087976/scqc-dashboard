@@ -64,14 +64,71 @@
     .forecast-day .fd-rain.dry { color: #3a5060; }
     .forecast-day .fd-bar { flex: 1; height: 4px; background: rgba(60,90,160,0.15); border-radius: 2px; position: relative; overflow: hidden; }
     .forecast-day .fd-bar-fill { height: 100%; border-radius: 2px; position: absolute; left: 0; top: 0; background: linear-gradient(90deg, #4a80d0, #e06060); }
-    .forecast-close { position: absolute; top: 12px; right: 16px; background: none; border: none; color: #5a7090; font-size: 22px; cursor: pointer; line-height: 1; }
-    .forecast-close:hover { color: #c8d8f8; }
+    .forecast-close, .calendar-close { position: absolute; top: 12px; right: 16px; background: none; border: none; color: #5a7090; font-size: 22px; cursor: pointer; line-height: 1; z-index: 2; }
+    .forecast-close:hover, .calendar-close:hover { color: #c8d8f8; }
+    /* Calendar Overlay */
+    .calendar-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); z-index: 1000; justify-content: center; align-items: center; }
+    .calendar-overlay.show { display: flex; }
+    .calendar-panel { position: relative; background: #0d1528; border: 1px solid rgba(60,120,220,0.3); border-radius: 12px; padding: 20px 24px; width: 480px; max-width: 95vw; max-height: 85vh; }
+    .calendar-left { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+    .calendar-left h3 { font-size: 18px; color: #c8d8f8; margin: 0 0 14px 0; letter-spacing: 1px; }
+    .cal-nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+    .cal-nav button { background: rgba(20,40,80,0.5); border: 1px solid rgba(60,120,220,0.2); color: #8aa0c8; font-size: 18px; cursor: pointer; padding: 4px 14px; border-radius: 6px; transition: all 0.2s; }
+    .cal-nav button:hover { background: rgba(40,80,160,0.3); color: #c0d8ff; }
+    .cal-legend { display: flex; gap: 16px; margin-bottom: 10px; font-size: 12px; color: #6a80b0; flex-wrap: wrap; }
+    .cal-legend span { display: flex; align-items: center; gap: 4px; }
+    .cal-legend .dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
+    .cal-legend .dot.holiday { background: #e04040; }
+    .cal-legend .dot.today { background: #4a90e2; }
+    .cal-legend .dot.workday { background: #4a6080; }
+    .cal-weekdays { display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; font-size: 13px; color: #5a7090; margin-bottom: 4px; padding: 4px 0; border-bottom: 1px solid rgba(50,80,140,0.2); }
+    .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; }
+    .cal-cell { text-align: center; padding: 4px 2px; border-radius: 4px; cursor: default; font-size: 13px; color: #8aa0c8; transition: background 0.15s; position: relative; min-height: 36px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    .cal-cell:hover { background: rgba(40,80,160,0.2); }
+    .cal-cell.other-month { color: #3a4a60; }
+    .cal-cell.weekend { color: #6a80a0; }
+    .cal-cell.holiday { color: #e04040 !important; font-weight: 700; }
+    .cal-cell.today { background: rgba(74,144,226,0.2) !important; border: 1px solid rgba(74,144,226,0.5); font-weight: 700; color: #6aacff !important; }
+    .cal-cell .holiday-name { font-size: 10px; color: #e06060; line-height: 1; margin-top: 1px; font-weight: 500; white-space: nowrap; }
+    .cal-cell .holiday-days { font-size: 9px; color: #d08080; line-height: 1; white-space: nowrap; }
+    /* Meeting Reminder Right Column */
+    .calendar-right { width: 240px; flex-shrink: 0; border-left: 1px solid rgba(60,120,220,0.2); padding-left: 18px; display: flex; flex-direction: column; overflow-y: auto; max-height: 100%; }
+    .calendar-right::-webkit-scrollbar { width: 4px; }
+    .calendar-right::-webkit-scrollbar-thumb { background: rgba(60,90,160,0.3); border-radius: 2px; }
+    .calendar-right h4 { font-size: 15px; color: #c0d8ff; margin: 0 0 12px 0; letter-spacing: 1px; display: flex; align-items: center; gap: 6px; }
+    .calendar-right h4::before { content: ''; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #f0a030; animation: pulse 2s infinite; }
+    .meeting-reminder-list { display: flex; flex-direction: column; gap: 8px; }
+    .meeting-item { background: rgba(20,40,80,0.4); border: 1px solid rgba(60,120,220,0.1); border-radius: 6px; padding: 8px 10px; font-size: 13px; }
+    .meeting-item.urgent { border-left: 2px solid #e04040; }
+    .meeting-item .meeting-date { font-size: 11px; color: #5a7090; margin-bottom: 2px; }
+    .meeting-item .meeting-title { font-size: 14px; color: #b0c8f0; font-weight: 600; margin-bottom: 2px; }
+    .meeting-item .meeting-info { font-size: 12px; color: #6a80b0; }
+    .meeting-item .meeting-tag { font-size: 10px; display: inline-block; padding: 1px 6px; border-radius: 3px; margin-top: 3px; }
+    .meeting-tag.meeting { background: rgba(74,144,226,0.2); color: #4a90e2; }
+    .meeting-tag.event { background: rgba(240,160,48,0.2); color: #f0a030; }
+    .meeting-tag.deadline { background: rgba(224,64,64,0.2); color: #e04040; }
     .header h1 { font-size: 24px; font-weight: 700; letter-spacing: 2px; color: #c8d8f8; }
     .header-title-sub { font-size: 14px; color: #6a80b0; letter-spacing: 1px; margin-top: 2px; }
-    .header-center { text-align: center; }
+    .header-center { text-align: center; cursor: pointer; position: relative; }
+    .header-center:hover .time { color: #b0c8ff; }
+    .header-center .cal-hint { font-size: 12px; color: #3a5070; margin-top: 1px; }
     .header-center .time { font-size: 28px; font-weight: 300; color: #8aacf0; letter-spacing: 1px; }
     .header-center .date { font-size: 14px; color: #5a70a0; margin-top: 2px; }
     .header-right { display: flex; gap: 22px; align-items: center; }
+    /* Compact meeting widget in header */
+    .header-meetings { display: flex; align-items: center; gap: 8px; overflow-x: auto; max-width: 420px; padding: 4px 0; scrollbar-width: none; }
+    .header-meetings::-webkit-scrollbar { display: none; }
+    .header-meetings::-webkit-scrollbar { height: 0; }
+    .hdr-meeting-item { background: rgba(20,40,80,0.55); border: 1px solid rgba(60,120,220,0.18); border-radius: 6px; padding: 3px 10px; white-space: nowrap; cursor: pointer; transition: all 0.2s; flex-shrink: 0; display: flex; align-items: center; gap: 5px; }
+    .hdr-meeting-item:hover { background: rgba(30,60,120,0.35); border-color: rgba(74,144,226,0.4); }
+    .hdr-meeting-item.urgent { border-left: 2px solid #e04040; }
+    .hdr-meeting-item .hdr-mt-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+    .hdr-meeting-item .hdr-mt-dot.meeting { background: #4a90e2; }
+    .hdr-meeting-item .hdr-mt-dot.event { background: #f0a030; }
+    .hdr-meeting-item .hdr-mt-dot.deadline { background: #e04040; }
+    .hdr-meeting-item .hdr-mt-date { font-size: 11px; color: #5a7090; }
+    .hdr-meeting-item .hdr-mt-title { font-size: 13px; color: #b0c8f0; font-weight: 500; }
+    .hdr-mt-divider { width: 1px; height: 18px; background: rgba(60,120,220,0.15); flex-shrink: 0; margin: 0 2px; }
     .stat-chip { text-align: right; }
     .stat-chip .label { font-size: 13px; color: #5a70a0; letter-spacing: 1px; }
     .stat-chip .value { font-size: 18px; font-weight: 700; color: #a0bcf0; }
@@ -209,6 +266,13 @@
       .forecast-panel { width: 95vw; padding: 14px 16px; max-height: 85vh; }
       .forecast-panel h3 { font-size: 15px; }
       .forecast-close { top: 8px; right: 12px; font-size: 18px; }
+      .calendar-panel { width: 95vw; padding: 14px 16px; max-height: 88vh; }
+      .calendar-close { top: 8px; right: 12px; font-size: 18px; }
+      .header-meetings { display: none; }
+      .cal-cell { font-size: 11px; padding: 2px 1px; min-height: 30px; }
+      .cal-cell .holiday-name { font-size: 8px; }
+      .cal-weekdays { font-size: 11px; }
+      .cal-nav button { font-size: 14px; padding: 3px 10px; }
       .forecast-day { padding: 6px 10px; gap: 8px; flex-wrap: wrap; }
       .forecast-day .fd-date { font-size: 12px; min-width: 72px; }
       .forecast-day .fd-icon { font-size: 20px; min-width: 28px; }
@@ -274,10 +338,12 @@
         <div class="header-title-sub">董事长数字化决策看板</div>
       </div>
     </div>
-    <div class="header-center">
+    <div class="header-center" onclick="toggleCalendar()" title="点击查看日历">
       <div class="time" id="liveTime">--:--:--</div>
       <div class="date" id="liveDate">----年--月--日</div>
+      <div class="cal-hint">点击查看日历</div>
     </div>
+    <div class="header-meetings" id="headerMeetings" onclick="toggleCalendar()" title="会议日程 · 点击查看完整日历"></div>
     <div class="header-right">
       <div class="weather-box" id="weatherBox" onclick="toggleForecast()" title="点击查看15日天气预报">
         <div class="weather-icon" id="weatherIcon">⛅</div>
@@ -409,130 +475,85 @@
       </div>
       <div class="card-body">
         <div class="news-grid">
-          <!-- 竞品（富临运业 + 运总） -->
-          <div class="news-item" onclick="openNews('https://www.chnfund.com/article/215c5ab6-b934-362a-c63f-3a226c9a66cb')">
-            <div><div class="news-source"><span class="tag fulin">竞品·富临运业</span>中国基金报 <span class="news-link-icon">↗</span></div>
-            <div class="news-title">富临运业上半年净利润预增134.56%-191.03%，确认股权处置收益2.08亿元</div></div>
-            <div class="news-date">2026-07-13</div>
-          </div>
-          <div class="news-item" onclick="openNews('https://finance.sina.cn/2026-08-05/detail-inimfwqr1455025.d.html')">
-            <div><div class="news-source"><span class="tag fulin">竞品·富临运业</span>证券之星 <span class="news-link-icon">↗</span></div>
-            <div class="news-title">富临运业A股股东户数增至18416户，户均持股市值14.67万元</div></div>
-            <div class="news-date">2026-08-05</div>
-          </div>
-          <div class="news-item" onclick="openNews('https://www.toutiao.com/article/7669742653323411995/')">
-            <div><div class="news-source"><span class="tag fulin">竞品·富临运业</span>今日头条 <span class="news-link-icon">↗</span></div>
-            <div class="news-title">富临运业换股参股三台农商行缩水八成，预提3100万元账面亏损</div></div>
+<!-- 竞品（富临运业 + 运总） -->
+          <div class="news-item" onclick="openNews('https://u.95579.com.cn/cjscweb/web/app/informationDetail.html?i_info_lsh=YWQyNGUxMjY4ZTdkZDQ5MWI3NDUzYzk4ZGVhZjJmMmY=')">
+            <div><div class="news-source"><span class="tag fulin">竞品·富临运业</span>长江证券 <span class="news-link-icon">↗</span></div>
+            <div class="news-title">富临运业触及涨停：2026中报预增134%-191%，控股股东拟转让18%股份，布局低空经济与无人驾驶</div></div>
             <div class="news-date">2026-08-03</div>
+          </div>
+          <div class="news-item" onclick="openNews('https://stock.stockstar.com/RB2026080600001659.shtml')">
+            <div><div class="news-source"><span class="tag fulin">竞品·富临运业</span>证券之星 <span class="news-link-icon">↗</span></div>
+            <div class="news-title">富临运业A股股东户数增至18416户，较上期增加1.34%，户均持股市值14.67万元</div></div>
+            <div class="news-date">2026-08-06</div>
+          </div>
+          <div class="news-item" onclick="openNews('https://www.caizhongshe.cn/news-7488522485047687101.html')">
+            <div><div class="news-source"><span class="tag fulin">竞品·富临运业</span>财中社 <span class="news-link-icon">↗</span></div>
+            <div class="news-title">富临运业参股三台农商行合并落地，转持绵阳农商行1.9553%股权，预提3100万元账面亏损</div></div>
+            <div class="news-date">2026-07-30</div>
           </div>
           <div class="news-item" onclick="openNews('https://emweb.securities.eastmoney.com/PC_HSF10/CompanyBigNews/index?code=SZ002357')">
             <div><div class="news-source"><span class="tag fulin">竞品·富临运业</span>东方财富 <span class="news-link-icon">↗</span></div>
-            <div class="news-title">富临运业预计上半年净利润2.7-3.35亿元，股权转让确认收益约2.08亿元</div></div>
+            <div class="news-title">富临运业预计上半年净利润2.7-3.35亿元，股权处置确认非经常性收益约2.08亿元，扣非净利同比微降</div></div>
             <div class="news-date">2026-07-14</div>
-          </div>
-          <div class="news-item" onclick="openNews('https://stock.stockstar.com/RB2026080400038153.shtml')">
-            <div><div class="news-source"><span class="tag fulin">竞品·富临运业</span>证券之星 <span class="news-link-icon">↗</span></div>
-            <div class="news-title">富临运业Q1营收1.95亿元净利润6553万元，主业承压扣非利润下降19%</div></div>
-            <div class="news-date">2026-08-04</div>
-          </div>
-          <div class="news-item" onclick="openNews('https://vip.stock.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?CompanyCode=80138681&gather=1&id=12056853')">
-            <div><div class="news-source"><span class="tag fulin">竞品·富临运业</span>新浪财经 <span class="news-link-icon">↗</span></div>
-            <div class="news-title">富临运业控股权拟变更：永锋集团14.18元/股转让18%股份，实控人将变更为东阳市国资办</div></div>
-            <div class="news-date">2026-04-02</div>
           </div>
           <div class="news-item" onclick="openNews('https://mchd.in-en.com/html/chd-2457493.shtml')">
             <div><div class="news-source"><span class="tag yunzong">竞品·运总</span>国际充换电网 <span class="news-link-icon">↗</span></div>
-            <div class="news-title">运总八里庄充电站投运，"油电一体"综合能源服务转型升级</div></div>
+            <div class="news-title">成都运总八里庄充电站正式投运，"油电一体"综合能源服务站转型升级，历时7个月建成</div></div>
             <div class="news-date">2026-02-10</div>
           </div>
-          <div class="news-item" onclick="openNews('https://jtt.sc.gov.cn/jtt/c102019/2026/2/12/4025fa702aa14a48a10fba6f1f7aa834.shtml')">
-            <div><div class="news-source"><span class="tag yunzong">竞品·运总</span>四川省交通运输厅 <span class="news-link-icon">↗</span></div>
-            <div class="news-title">运总护航2026春运及省"三下乡"活动运输保障，实现零事故零延误</div></div>
-            <div class="news-date">2026-02-12</div>
-          </div>
-          <div class="news-item" onclick="openNews('http://mp.weixin.qq.com/s?__biz=MjM5NjU0Njk0Nw==&mid=2651536874&idx=1&sn=2761257ecc7acf4a5215e3fea3b38cbd')">
-            <div><div class="news-source"><span class="tag yunzong">竞品·运总</span>成都市物流协会 <span class="news-link-icon">↗</span></div>
-            <div class="news-title">成都运总：总资产超18亿元，下设23个分公司、18家全资子公司，年产值突破10亿元</div></div>
-            <div class="news-date">2026-06-03</div>
+          <div class="news-item" onclick="openNews('https://www.ccgp.gov.cn/cggg/dfgg/cjgg/202603/t20260323_26302299.htm')">
+            <div><div class="news-source"><span class="tag yunzong">竞品·运总</span>中国政府采购网 <span class="news-link-icon">↗</span></div>
+            <div class="news-title">成都运总中标四川省骨科医院通勤车租赁项目，三年合同金额179.96万元</div></div>
+            <div class="news-date">2026-03-23</div>
           </div>
           <div class="news-item" onclick="openNews('https://jtt.sc.gov.cn/jtt/c102019/2026/2/5/791bde5536724470be87872040619d6d.shtml')">
             <div><div class="news-source"><span class="tag yunzong">竞品·运总</span>四川省交通运输厅 <span class="news-link-icon">↗</span></div>
-            <div class="news-title">运总召开2026春运安全生产部署大会，总经理卢涛强调应对客流创新高与恶劣天气</div></div>
+            <div class="news-title">运总召开2026春运安全生产部署大会，总经理卢涛强调应对客流创新高与恶劣天气双重挑战</div></div>
             <div class="news-date">2026-02-05</div>
           </div>
           <!-- 行业动态 / 政策法规 -->
-          <div class="news-item" onclick="openNews('https://www.toutiao.com/article/7669607767530848787/')">
-            <div><div class="news-source"><span class="tag policy">政策法规</span>人民网 <span class="news-link-icon">↗</span></div>
-            <div class="news-title">交通运输部等四部门印发《综合运输服务发展"十五五"规划》</div></div>
-            <div class="news-date">2026-08-03</div>
-          </div>
-          <div class="news-item" onclick="openNews('https://new.qq.com/rain/a/20260803A05WRX00')">
-            <div><div class="news-source"><span class="tag policy">政策法规</span>成都市交通运输局 <span class="news-link-icon">↗</span></div>
-            <div class="news-title">成都四部门联合开展道路客运非法营运综合治理，为期三个月</div></div>
-            <div class="news-date">2026-08-03</div>
-          </div>
           <div class="news-item" onclick="openNews('https://jx.people.com.cn/BIG5/n2/2026/0804/c186330-41658334.html')">
             <div><div class="news-source"><span class="tag policy">政策法规</span>人民网 <span class="news-link-icon">↗</span></div>
-            <div class="news-title">四部门印发《交通运输纵深推进全国统一大市场建设实施方案》</div></div>
+            <div class="news-title">四部门印发《交通运输纵深推进全国统一大市场建设实施方案》，聚焦6大重点任务打通卡点堵点</div></div>
             <div class="news-date">2026-08-04</div>
           </div>
-          <div class="news-item" onclick="openNews('https://jtt.sc.gov.cn/jtt/c111874/2026/5/19/a95de087067143d7a27e4fb1b64c5426.shtml')">
-            <div><div class="news-source"><span class="tag policy">政策法规</span>四川省交通运输厅 <span class="news-link-icon">↗</span></div>
-            <div class="news-title">四川出台农村客运车辆更新补贴细则：新能源车最高补6万元/台，鼓励"大改小"</div></div>
-            <div class="news-date">2026-05-19</div>
-          </div>
-          <div class="news-item" onclick="openNews('https://new.qq.com/rain/a/20260803A0947R00')">
-            <div><div class="news-source"><span class="tag industry">行业动态</span>腾讯新闻 <span class="news-link-icon">↗</span></div>
-            <div class="news-title">8月起一批道路运输新国标实施：含新能源维修安全、北斗导航等</div></div>
+          <div class="news-item" onclick="openNews('https://www.163.com/dy/article/L3DASI6I0514R9M0.html')">
+            <div><div class="news-source"><span class="tag policy">政策法规</span>人民日报 <span class="news-link-icon">↗</span></div>
+            <div class="news-title">交通运输部等四部门印发《综合运输服务发展"十五五"规划》，到2030年基本建成现代化综合运输服务体系</div></div>
             <div class="news-date">2026-08-03</div>
           </div>
-          <div class="news-item" onclick="openNews('https://jtt.sc.gov.cn/jtt/c101586/2026/7/31/ebb4ee0c46064bd7a6a4598e8cdcbc12.shtml')">
-            <div><div class="news-source"><span class="tag industry">行业动态</span>四川省交通运输厅 <span class="news-link-icon">↗</span></div>
-            <div class="news-title">乐山启动5个月道路运输非法改装专项整治，覆盖全市维修企业</div></div>
-            <div class="news-date">2026-08-01</div>
+          <div class="news-item" onclick="openNews('https://cdwglj.chengdu.gov.cn/cdwglj/c133186/2026-08/03/content_0b2e1d5a861748df83cb074d9f355653.shtml')">
+            <div><div class="news-source"><span class="tag policy">政策法规</span>成都市文广旅局 <span class="news-link-icon">↗</span></div>
+            <div class="news-title">成都四部门联合开展道路客运非法营运综合治理，集中整治为期三个月</div></div>
+            <div class="news-date">2026-08-03</div>
           </div>
-          <div class="news-item" onclick="openNews('https://www.zgjtb.com/2026-07/08/content_527243.html')">
-            <div><div class="news-source"><span class="tag industry">行业动态</span>中国交通报 <span class="news-link-icon">↗</span></div>
-            <div class="news-title">成渝便民快巴投用纯电动客车，日均超30班次上座率超95%，能耗成本降60%</div></div>
-            <div class="news-date">2026-07-08</div>
+          <div class="news-item" onclick="openNews('https://www.163.com/dy/article/L3E72GTD0514N6SD.html')">
+            <div><div class="news-source"><span class="tag industry">行业动态</span>成都交通运输 <span class="news-link-icon">↗</span></div>
+            <div class="news-title">成都市交通运输局发布汛期道路运输安全防范指南：暴雨地灾红橙黄蓝四级预警响应机制</div></div>
+            <div class="news-date">2026-08-03</div>
           </div>
           <!-- 便民快巴 / 公司相关 -->
           <div class="news-item" onclick="openNews('https://www.163.com/dy/article/L382GQ6I05449RE8.html')">
             <div><div class="news-source"><span class="tag bianmin">便民快巴</span>网易新闻 <span class="news-link-icon">↗</span></div>
-            <div class="news-title">川渝多地纳入成都"快巴圈"：11条线路集中上线，直达避暑目的地</div></div>
+            <div class="news-title">川渝多地纳入成都"快巴圈"：11条线路集中上线，一站式直达安仁、街子、彭州等避暑目的地</div></div>
             <div class="news-date">2026-08-01</div>
           </div>
-          <div class="news-item" onclick="openNews('https://k.sina.cn/article_1726918143_66eeadff02001u6q6.html')">
-            <div><div class="news-source"><span class="tag bianmin">便民快巴</span>央视网/新浪 <span class="news-link-icon">↗</span></div>
-            <div class="news-title">成渝便民快巴上座率超90%，每日常态24-56班，50元新能源直达</div></div>
+          <div class="news-item" onclick="openNews('https://www.toutiao.com/article/7666789955833889299/')">
+            <div><div class="news-source"><span class="tag bianmin">便民快巴</span>今日头条 <span class="news-link-icon">↗</span></div>
+            <div class="news-title">成渝便民快巴"逆天改命"：上座率超90%，常态24-56班·50元新能源直达，11天破1.5万人次</div></div>
             <div class="news-date">2026-08-01</div>
           </div>
           <div class="news-item" onclick="openNews('https://wap.scsjb.cn/news/51951/')">
             <div><div class="news-source"><span class="tag bianmin">便民快巴</span>四川手机报 <span class="news-link-icon">↗</span></div>
-            <div class="news-title">省汽成运成都⇌邛崃站点巴士开通，优惠期单程4.9元，日行40班</div></div>
+            <div class="news-title">省汽成运成都⇌邛崃站点巴士开通，优惠期单程仅4.9元，每日运营40个班次</div></div>
             <div class="news-date">2026-07-08</div>
-          </div>
-          <div class="news-item" onclick="openNews('https://sc.cnr.cn/scpd/jdt/20260201/t20260201_527512316.shtml')">
-            <div><div class="news-source"><span class="tag bianmin">便民快巴</span>央广网 <span class="news-link-icon">↗</span></div>
-            <div class="news-title">成都⇌广元站点巴士开通，最低票价39.9元，省汽成运联合广运集团运营</div></div>
-            <div class="news-date">2026-02-01</div>
           </div>
           <div class="news-item" onclick="openNews('https://www.chengyun.com/newsinfo/11172233.html')">
             <div><div class="news-source"><span class="tag company">公司相关</span>省汽成运官网 <span class="news-link-icon">↗</span></div>
-            <div class="news-title">省汽成运五一安全检查：总经理王世海带队慰问一线，强调GPS监控24h值守</div></div>
+            <div class="news-title">省汽成运五一安全检查：总经理王世海带队深入一线，强调GPS监控24小时值守和安全生产提级管控</div></div>
             <div class="news-date">2026-05-01</div>
           </div>
-          <div class="news-item" onclick="openNews('https://std.samr.gov.cn/gb/search/gbqSuggestionDetail?id=CC57977E183DE01CBD489B757EDADAA6')">
-            <div><div class="news-source"><span class="tag policy">政策法规</span>交通运输部 <span class="news-link-icon">↗</span></div>
-            <div class="news-title">《营运车辆运营安全技术和管理要求》强制性国标征求意见，拟12个月后实施</div></div>
-            <div class="news-date">2026-06-30</div>
-          </div>
-          <div class="news-item" onclick="openNews('https://rst.sc.gov.cn/rst/gsgg/2026/4/14/9500b27353a742d1b30cc4fd96ca27ee.shtml')">
-            <div><div class="news-source"><span class="tag company">公司相关</span>四川省人社厅 <span class="news-link-icon">↗</span></div>
-            <div class="news-title">省汽成运中标四川省职业介绍服务中心2026-2027年公务用车租赁项目</div></div>
-            <div class="news-date">2026-04-14</div>
-          </div>
-        </div>
+        
       </div>
     </div>
 
@@ -544,6 +565,30 @@
       <button class="forecast-close" onclick="toggleForecast()">&times;</button>
       <h3>成都 · 未来15日天气预报</h3>
       <div class="forecast-list" id="forecastList">加载中…</div>
+    </div>
+  </div>
+
+  <!-- Calendar Overlay -->
+  <div class="calendar-overlay" id="calendarOverlay" onclick="if(event.target===this)toggleCalendar()">
+    <div class="calendar-panel" onclick="event.stopPropagation()">
+      <button class="calendar-close" onclick="toggleCalendar()">&times;</button>
+      <div class="calendar-left">
+        <h3 id="calTitle">2026年8月 · 日历</h3>
+        <div class="cal-legend">
+          <span><span class="dot today"></span>今天</span>
+          <span><span class="dot holiday"></span>法定节假日</span>
+          <span><span class="dot workday"></span>工作日</span>
+        </div>
+        <div class="cal-nav">
+          <button onclick="calPrevMonth()">&lt;</button>
+          <span id="calMonthLabel" style="font-size:16px;color:#c0d8ff;font-weight:600;"></span>
+          <button onclick="calNextMonth()">&gt;</button>
+        </div>
+        <div class="cal-weekdays">
+          <div>日</div><div>一</div><div>二</div><div>三</div><div>四</div><div>五</div><div>六</div>
+        </div>
+        <div class="cal-grid" id="calGrid"></div>
+      </div>
     </div>
   </div>
 
@@ -575,6 +620,7 @@
       document.getElementById('updateTime').textContent = now.toLocaleString('zh-CN');
     }
     updateTime(); setInterval(updateTime, 1000);
+    renderMeetingReminders();
 
     document.getElementById('hdrCapital').textContent = '¥ 13,816.13万元';
     document.getElementById('hdrShareholders').textContent = '2,151 人';
@@ -641,6 +687,7 @@
         return '<div class="forecast-day' + (isToday ? ' today' : '') + '">' +
           '<div class="fd-date">' + dateStr + '<span class="dayname">' + dayStr + '</span></div>' +
           '<div class="fd-icon">' + info[0] + '</div>' +
+          '<div class="fd-desc">' + info[1] + '</div>' +
           '<div class="fd-temps"><span>' + d.max.toFixed(0) + '°</span><span class="lo">' + d.min.toFixed(0) + '°</span></div>' +
           '<div class="fd-bar"><div class="fd-bar-fill" style="left:' + leftPct + '%;width:' + wPct + '%"></div></div>' +
           (d.rain > 0 ? '<div class="fd-rain">🌧 ' + d.rain + '%</div>' : '<div class="fd-rain dry">--</div>') +
@@ -710,6 +757,148 @@
       options: {
         responsive:true, maintainAspectRatio:true, cutout:'60%',
         plugins: { legend:{ display:false }, tooltip:{ backgroundColor:'rgba(15,22,44,0.95)', bodyColor:'#c0d8ff', callbacks:{ label:function(c){return c.label+': '+c.raw+' 人'} } } }
+      }
+    });
+
+    // ===== Calendar with Chinese Statutory Holidays =====
+    var calDate = new Date();
+    // 2026年中国法定节假日（日期 + 节日名称 + 放假天数）
+    var holidays = {
+      '1-1':  {name:'元旦', days:'3天'},
+      '1-2':  {name:'元旦', days:'3天'},
+      '1-3':  {name:'元旦', days:'3天'},
+      '2-17': {name:'春节', days:'7天'},
+      '2-18': {name:'春节', days:'7天'},
+      '2-19': {name:'春节', days:'7天'},
+      '2-20': {name:'春节', days:'7天'},
+      '2-21': {name:'春节', days:'7天'},
+      '2-22': {name:'春节', days:'7天'},
+      '2-23': {name:'春节', days:'7天'},
+      '4-4':  {name:'清明', days:'3天'},
+      '4-5':  {name:'清明', days:'3天'},
+      '4-6':  {name:'清明', days:'3天'},
+      '5-1':  {name:'劳动节', days:'5天'},
+      '5-2':  {name:'劳动节', days:'5天'},
+      '5-3':  {name:'劳动节', days:'5天'},
+      '5-4':  {name:'劳动节', days:'5天'},
+      '5-5':  {name:'劳动节', days:'5天'},
+      '6-19': {name:'端午', days:'3天'},
+      '6-20': {name:'端午', days:'3天'},
+      '6-21': {name:'端午', days:'3天'},
+      '9-29': {name:'中秋', days:'1天'},
+      '10-1': {name:'国庆', days:'7天'},
+      '10-2': {name:'国庆', days:'7天'},
+      '10-3': {name:'国庆', days:'7天'},
+      '10-4': {name:'国庆', days:'7天'},
+      '10-5': {name:'国庆', days:'7天'},
+      '10-6': {name:'国庆', days:'7天'},
+      '10-7': {name:'国庆', days:'7天'}
+    };
+
+    function renderCalendar() {
+      var y = calDate.getFullYear(), m = calDate.getMonth();
+      document.getElementById('calMonthLabel').textContent = y + '年' + (m + 1) + '月';
+      var firstDay = new Date(y, m, 1).getDay();
+      var daysInMonth = new Date(y, m + 1, 0).getDate();
+      var prevDays = new Date(y, m, 0).getDate();
+      var grid = document.getElementById('calGrid');
+      grid.innerHTML = '';
+      // Previous month padding
+      for (var i = 0; i < firstDay; i++) {
+        var d = prevDays - firstDay + 1 + i;
+        var c = document.createElement('div');
+        c.className = 'cal-cell other-month'; c.textContent = d; grid.appendChild(c);
+      }
+      var today = new Date();
+      for (var i = 1; i <= daysInMonth; i++) {
+        var c = document.createElement('div');
+        c.className = 'cal-cell';
+        var dow = new Date(y, m, i).getDay();
+        if (dow === 0 || dow === 6) c.className += ' weekend';
+        if (today.getFullYear() === y && today.getMonth() === m && today.getDate() === i) c.className += ' today';
+        var hk = (m + 1) + '-' + i;
+        if (holidays[hk]) {
+          c.className += ' holiday';
+          c.innerHTML = i + '<span class="holiday-name">' + holidays[hk].name + '</span><span class="holiday-days">' + holidays[hk].days + '</span>';
+        } else {
+          c.textContent = i;
+        }
+        grid.appendChild(c);
+      }
+      var totalCells = firstDay + daysInMonth;
+      var remaining = (7 - totalCells % 7) % 7;
+      for (var i = 1; i <= remaining; i++) {
+        var c = document.createElement('div');
+        c.className = 'cal-cell other-month'; c.textContent = i; grid.appendChild(c);
+      }
+    }
+
+    function calPrevMonth() { calDate.setMonth(calDate.getMonth() - 1); renderCalendar(); }
+    function calNextMonth() { calDate.setMonth(calDate.getMonth() + 1); renderCalendar(); }
+
+    function toggleCalendar() {
+      var overlay = document.getElementById('calendarOverlay');
+      if (!overlay.classList.contains('show')) {
+        calDate = new Date(); // Reset to current month
+        renderCalendar();
+      }
+      overlay.classList.toggle('show');
+    }
+
+    // ===== Meeting Reminders (Header Widget) =====
+    var meetingReminders = [
+      {date:'8月5日', title:'月度经营分析会', info:'第二会议室 · 全体高管', tag:'meeting', urgent:true},
+      {date:'8月5日', title:'安全生产专项检查', info:'城北客运站现场检查', tag:'event', urgent:true},
+      {date:'8月8日', title:'便民快巴运营周会', info:'5条线路数据复盘', tag:'meeting', urgent:false},
+      {date:'8月10日', title:'驾驶员安全培训考核', info:'年度安全考核截止', tag:'deadline', urgent:false},
+      {date:'8月12日', title:'新能源车辆采购评审', info:'30辆纯电动客车评标', tag:'event', urgent:false},
+      {date:'8月15日', title:'半年度经营报告提交', info:'向国资委提交报告', tag:'deadline', urgent:false},
+      {date:'8月18日', title:'股东名册月度更新', info:'更新7月股东变动', tag:'event', urgent:false},
+      {date:'8月22日', title:'季度董事会', info:'审议Q3财务及投资', tag:'meeting', urgent:false},
+      {date:'8月25日', title:'8月营收结算', info:'各线路营收汇总', tag:'deadline', urgent:false}
+    ];
+
+    var tagNames = {meeting:'会议', event:'事项', deadline:'截止'};
+
+    function renderMeetingReminders() {
+      var container = document.getElementById('headerMeetings');
+      if (!container) return;
+      container.innerHTML = '';
+      // Show max 4 upcoming items in header (compact)
+      var now = new Date();
+      var upcoming = meetingReminders.filter(function(r) {
+        // Parse the date - all are in August 2026 context
+        return true; // show all for now, sorted by date
+      });
+      var maxShow = 4;
+      meetingReminders.slice(0, maxShow).forEach(function(r, idx) {
+        if (idx > 0) {
+          var div = document.createElement('div');
+          div.className = 'hdr-mt-divider';
+          container.appendChild(div);
+        }
+        var item = document.createElement('div');
+        item.className = 'hdr-meeting-item' + (r.urgent ? ' urgent' : '');
+        item.title = r.title + ' — ' + r.info + ' [' + tagNames[r.tag] + ']';
+        item.innerHTML = '<span class="hdr-mt-dot ' + r.tag + '"></span>' +
+          '<span class="hdr-mt-date">' + r.date + '</span>' +
+          '<span class="hdr-mt-title">' + r.title + '</span>';
+        container.appendChild(item);
+      });
+      if (meetingReminders.length > maxShow) {
+        var more = document.createElement('div');
+        more.className = 'hdr-meeting-item';
+        more.style.cssText = 'background:rgba(30,50,80,0.3);border-style:dashed;';
+        more.innerHTML = '<span style="font-size:12px;color:#5a7090;">+' + (meetingReminders.length - maxShow) + ' 更多</span>';
+        container.appendChild(more);
+      }
+    }
+
+    // ESC key to close overlays
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        document.getElementById('forecastOverlay').classList.remove('show');
+        document.getElementById('calendarOverlay').classList.remove('show');
       }
     });
   </script>
