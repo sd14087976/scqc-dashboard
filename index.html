@@ -12,8 +12,8 @@
   <meta property="og:type" content="website">
   <meta property="og:image" content="">
   <title>省汽成运 · 董事长数字化看板</title>
-  <script src="https://cdn.bootcdn.net/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
-  <script>window.Chart||document.write('<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"><\/script>');</script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script>if(!window.Chart)document.write('<script src="https://unpkg.com/chart.js@4.4.0/dist/chart.umd.min.js"><\/script>');</script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -117,22 +117,45 @@
     .header-center .time { font-size: 28px; font-weight: 300; color: #8aacf0; letter-spacing: 1px; }
     .header-center .date { font-size: 14px; color: #5a70a0; margin-top: 2px; }
     .header-right { display: flex; gap: 22px; align-items: center; }
-    /* Compact meeting widget in header */
-    .header-meetings { display: flex; align-items: center; gap: 10px; overflow-x: auto; max-width: 460px; padding: 4px 0; scrollbar-width: none; cursor: pointer; }
-    .header-meetings::-webkit-scrollbar { display: none; }
-    .header-meetings::-webkit-scrollbar { height: 0; }
-    .hdr-meeting-item { background: rgba(20,40,80,0.7); border: 1px solid rgba(60,120,220,0.22); border-radius: 8px; padding: 6px 12px; white-space: nowrap; cursor: pointer; transition: all 0.2s; flex-shrink: 0; display: flex; flex-direction: column; gap: 3px; min-width: 100px; }
-    .hdr-meeting-item:hover { background: rgba(30,60,120,0.4); border-color: rgba(74,144,226,0.5); transform: translateY(-1px); }
-    .hdr-meeting-item.urgent { border-left: 3px solid #e04040; }
-    .hdr-meeting-item .hdr-mt-top { display: flex; align-items: center; gap: 5px; }
-    .hdr-meeting-item .hdr-mt-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
-    .hdr-meeting-item .hdr-mt-dot.meeting { background: #4a90e2; }
-    .hdr-meeting-item .hdr-mt-dot.event { background: #f0a030; }
-    .hdr-meeting-item .hdr-mt-dot.deadline { background: #e04040; }
-    .hdr-meeting-item .hdr-mt-date { font-size: 11px; color: #5a7090; }
-    .hdr-meeting-item .hdr-mt-title { font-size: 13px; color: #b0c8f0; font-weight: 600; }
-    .hdr-meeting-item .hdr-mt-tag { font-size: 10px; color: #4a6080; margin-top: 1px; }
-    .hdr-mt-divider { width: 1px; height: 24px; background: rgba(60,120,220,0.18); flex-shrink: 0; margin: 0 2px; }
+    <!-- Meeting button in header -->
+    .header-meeting-btn {
+      display: flex; align-items: center; gap: 6px; cursor: pointer;
+      background: rgba(20,40,80,0.5); border: 1px solid rgba(240,160,48,0.3);
+      border-radius: 8px; padding: 6px 16px; transition: all 0.2s;
+      font-size: 14px; color: #f0a030; font-weight: 600; letter-spacing: 1px;
+      white-space: nowrap; flex-shrink: 0;
+    }
+    .header-meeting-btn:hover { background: rgba(40,80,160,0.3); border-color: #f0a030; transform: translateY(-1px); }
+    .header-meeting-btn .meeting-dot { width: 8px; height: 8px; border-radius: 50%; background: #f0a030; animation: pulse 2s infinite; }
+    .header-meeting-btn .meeting-count { display: inline-flex; align-items: center; justify-content: center;
+      background: #e04040; color: #fff; font-size: 12px; font-weight: 700; min-width: 22px;
+      height: 18px; border-radius: 9px; padding: 0 6px; margin-left: 2px; }
+    /* Meeting Overlay */
+    .meeting-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); z-index: 1000; justify-content: center; align-items: center; }
+    .meeting-overlay.show { display: flex; }
+    .meeting-panel { position: relative; background: #0d1528; border: 1px solid rgba(60,120,220,0.3); border-radius: 12px; padding: 20px 24px; width: 520px; max-width: 92vw; max-height: 80vh; display: flex; flex-direction: column; }
+    .meeting-panel h3 { font-size: 18px; color: #f0a030; margin: 0 0 14px 0; letter-spacing: 1px; display: flex; align-items: center; gap: 8px; }
+    .meeting-panel h3::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #f0a030; animation: pulse 2s infinite; }
+    .meeting-close { position: absolute; top: 12px; right: 16px; background: none; border: none; color: #5a7090; font-size: 22px; cursor: pointer; line-height: 1; z-index: 2; }
+    .meeting-close:hover { color: #c8d8f8; }
+    .meeting-list { display: flex; flex-direction: column; gap: 8px; overflow-y: auto; flex: 1; padding-right: 6px; }
+    .meeting-list::-webkit-scrollbar { width: 4px; }
+    .meeting-list::-webkit-scrollbar-thumb { background: rgba(60,90,160,0.3); border-radius: 2px; }
+    .m-item { background: rgba(20,40,80,0.4); border: 1px solid rgba(60,120,220,0.12); border-radius: 8px; padding: 10px 16px; display: flex; align-items: center; gap: 14px; transition: background 0.2s; }
+    .m-item:hover { background: rgba(30,60,120,0.3); }
+    .m-item.urgent { border-left: 3px solid #e04040; }
+    .m-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+    .m-dot.meeting { background: #4a90e2; }
+    .m-dot.event { background: #f0a030; }
+    .m-dot.deadline { background: #e04040; }
+    .m-date { font-size: 14px; color: #8aa0c8; min-width: 56px; font-weight: 600; }
+    .m-body { flex: 1; min-width: 0; }
+    .m-title { font-size: 15px; color: #c0d8ff; font-weight: 600; }
+    .m-info { font-size: 12px; color: #5a7090; margin-top: 2px; }
+    .m-tag { font-size: 11px; padding: 2px 8px; border-radius: 4px; flex-shrink: 0; }
+    .m-tag.meeting { background: rgba(74,144,226,0.2); color: #4a90e2; }
+    .m-tag.event { background: rgba(240,160,48,0.2); color: #f0a030; }
+    .m-tag.deadline { background: rgba(224,64,64,0.2); color: #e04040; }
     .stat-chip { text-align: right; }
     .stat-chip .label { font-size: 13px; color: #5a70a0; letter-spacing: 1px; }
     .stat-chip .value { font-size: 18px; font-weight: 700; color: #a0bcf0; }
@@ -272,7 +295,7 @@
       .forecast-close { top: 8px; right: 12px; font-size: 18px; }
       .calendar-panel { width: 95vw; padding: 14px 16px; max-height: 88vh; }
       .calendar-close { top: 8px; right: 12px; font-size: 18px; }
-      .header-meetings { display: none; }
+      .header-meeting-btn { padding: 4px 10px; font-size: 12px; }
       .cal-cell { font-size: 11px; padding: 2px 1px; min-height: 30px; }
       .cal-cell .holiday-name { font-size: 8px; }
       .cal-weekdays { font-size: 11px; }
@@ -347,7 +370,9 @@
       <div class="date" id="liveDate">----年--月--日</div>
       <div class="cal-hint">点击查看日历</div>
     </div>
-    <div class="header-meetings" id="headerMeetings" onclick="toggleCalendar()" title="会议日程 · 点击查看完整日历"></div>
+    <div class="header-meeting-btn" id="headerMeetingBtn" onclick="toggleMeetings()" title="会议事项 · 点击查看详情">
+      <span class="meeting-dot"></span>会议事项<span class="meeting-count" id="meetingCount">9</span> ▾
+    </div>
     <div class="header-right">
       <div class="weather-box" id="weatherBox" onclick="toggleForecast()" title="点击查看15日天气预报">
         <div class="weather-icon" id="weatherIcon">⛅</div>
@@ -706,6 +731,15 @@
     </div>
   </div>
 
+  <!-- Meeting Overlay -->
+  <div class="meeting-overlay" id="meetingOverlay" onclick="if(event.target===this)toggleMeetings()">
+    <div class="meeting-panel" onclick="event.stopPropagation()">
+      <button class="meeting-close" onclick="toggleMeetings()">&times;</button>
+      <h3>会议事项</h3>
+      <div class="meeting-list" id="meetingList"></div>
+    </div>
+  </div>
+
   <!-- Calendar Overlay -->
   <div class="calendar-overlay" id="calendarOverlay" onclick="if(event.target===this)toggleCalendar()">
     <div class="calendar-panel" onclick="event.stopPropagation()">
@@ -772,7 +806,7 @@
       {date:'8月25日', title:'8月营收结算', info:'各线路营收汇总', tag:'deadline', urgent:false}
     ];
     var tagNames = {meeting:'会议', event:'事项', deadline:'截止'};
-    renderMeetingReminders();
+    renderMeetingCount();
 
     // Chengdu weather (Open-Meteo free API)
     const WMO = {
@@ -1151,42 +1185,33 @@
       overlay.classList.toggle('show');
     }
 
-    // ===== Meeting Reminders (Header Widget) =====
-    function renderMeetingReminders() {
-      var container = document.getElementById('headerMeetings');
-      if (!container) return;
-      container.innerHTML = '';
-      // Show max 4 upcoming items in header (compact)
-      var now = new Date();
-      var upcoming = meetingReminders.filter(function(r) {
-        // Parse the date - all are in August 2026 context
-        return true; // show all for now, sorted by date
-      });
-      var maxShow = 4;
-      meetingReminders.slice(0, maxShow).forEach(function(r, idx) {
-        if (idx > 0) {
-          var div = document.createElement('div');
-          div.className = 'hdr-mt-divider';
-          container.appendChild(div);
-        }
-        var item = document.createElement('div');
-        item.className = 'hdr-meeting-item' + (r.urgent ? ' urgent' : '');
-        item.title = r.info + ' [' + tagNames[r.tag] + ']';
-        item.innerHTML = '<div class="hdr-mt-top">' +
-          '<span class="hdr-mt-dot ' + r.tag + '"></span>' +
-          '<span class="hdr-mt-date">' + r.date + '</span>' +
+    // ===== Meeting Panel =====
+    function renderMeetingCount() {
+      var el = document.getElementById('meetingCount');
+      if (el) el.textContent = meetingReminders.length;
+    }
+    function renderMeetingPanel() {
+      var list = document.getElementById('meetingList');
+      if (!list) return;
+      list.innerHTML = meetingReminders.map(function(r) {
+        return '<div class="m-item' + (r.urgent ? ' urgent' : '') + '">' +
+          '<span class="m-dot ' + r.tag + '"></span>' +
+          '<span class="m-date">' + r.date + '</span>' +
+          '<div class="m-body">' +
+            '<div class="m-title">' + r.title + '</div>' +
+            '<div class="m-info">' + r.info + '</div>' +
           '</div>' +
-          '<span class="hdr-mt-title">' + r.title + '</span>' +
-          '<span class="hdr-mt-tag">' + tagNames[r.tag] + '</span>';
-        container.appendChild(item);
-      });
-      if (meetingReminders.length > maxShow) {
-        var more = document.createElement('div');
-        more.className = 'hdr-meeting-item';
-        more.style.cssText = 'background:rgba(30,50,80,0.3);border-style:dashed;';
-        more.innerHTML = '<span style="font-size:12px;color:#5a7090;">+' + (meetingReminders.length - maxShow) + ' 更多</span>';
-        container.appendChild(more);
+          '<span class="m-tag ' + r.tag + '">' + tagNames[r.tag] + '</span>' +
+        '</div>';
+      }).join('');
+    }
+
+    function toggleMeetings() {
+      var overlay = document.getElementById('meetingOverlay');
+      if (!overlay.classList.contains('show')) {
+        renderMeetingPanel();
       }
+      overlay.classList.toggle('show');
     }
 
     // ESC key to close overlays
@@ -1194,6 +1219,7 @@
       if (e.key === 'Escape') {
         document.getElementById('forecastOverlay').classList.remove('show');
         document.getElementById('calendarOverlay').classList.remove('show');
+        document.getElementById('meetingOverlay').classList.remove('show');
       }
     });
   </script>
