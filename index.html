@@ -432,17 +432,16 @@
     <div class="card">
       <div class="card-header">
         <div class="card-title">员工概况</div>
-        <span class="card-badge">在职 3,850 人</span>
+        <span class="card-badge">在职 1,550 人</span>
       </div>
       <div class="card-body">
         <div class="employee-breakdown">
           <div class="employee-chart-wrap"><canvas id="employeeChart"></canvas></div>
           <div class="employee-legend">
-            <div class="employee-legend-item"><span class="employee-legend-dot" style="background:#4a90e2"></span><span class="employee-legend-name">驾驶员</span><span class="employee-legend-val">1,830人</span></div>
-            <div class="employee-legend-item"><span class="employee-legend-dot" style="background:#50c8a0"></span><span class="employee-legend-name">站务/票务</span><span class="employee-legend-val">820人</span></div>
-            <div class="employee-legend-item"><span class="employee-legend-dot" style="background:#c0a040"></span><span class="employee-legend-name">管理人员</span><span class="employee-legend-val">560人</span></div>
-            <div class="employee-legend-item"><span class="employee-legend-dot" style="background:#e06070"></span><span class="employee-legend-name">维修/技术</span><span class="employee-legend-val">410人</span></div>
-            <div class="employee-legend-item"><span class="employee-legend-dot" style="background:#a080d0"></span><span class="employee-legend-name">其他（后勤等）</span><span class="employee-legend-val">230人</span></div>
+            <div class="employee-legend-item"><span class="employee-legend-dot" style="background:#4a90e2"></span><span class="employee-legend-name">驾驶员</span><span class="employee-legend-val">430人</span></div>
+            <div class="employee-legend-item"><span class="employee-legend-dot" style="background:#c0a040"></span><span class="employee-legend-name">管理人员</span><span class="employee-legend-val">760人</span></div>
+            <div class="employee-legend-item"><span class="employee-legend-dot" style="background:#e06070"></span><span class="employee-legend-name">维修/技术</span><span class="employee-legend-val">230人</span></div>
+            <div class="employee-legend-item"><span class="employee-legend-dot" style="background:#a080d0"></span><span class="employee-legend-name">其他</span><span class="employee-legend-val">130人</span></div>
           </div>
         </div>
         <div style="margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:14px;">
@@ -972,8 +971,8 @@
       new Chart(empCtx, {
         type:'doughnut',
         data: {
-          labels:['驾驶员','站务/票务','管理人员','维修/技术','其他'],
-          datasets:[{ data:[1830,820,560,410,230], backgroundColor:['#4a90e2','#50c8a0','#c0a040','#e06070','#a080d0'], borderColor:'rgba(15,22,44,0.9)', borderWidth:2 }]
+          labels:['驾驶员','管理人员','维修/技术','其他'],
+          datasets:[{ data:[430,760,230,130], backgroundColor:['#4a90e2','#c0a040','#e06070','#a080d0'], borderColor:'rgba(15,22,44,0.9)', borderWidth:2 }]
         },
         options: {
           responsive:true, maintainAspectRatio:true, cutout:'60%',
