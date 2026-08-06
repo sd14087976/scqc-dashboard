@@ -42,9 +42,9 @@
       position: relative; z-index: 1;
       background: linear-gradient(180deg, rgba(15,23,50,0.98) 0%, rgba(10,14,26,0.9) 100%);
       border-bottom: 1px solid rgba(60,120,220,0.25);
-      padding: 14px 36px; display: flex; align-items: center; gap: 48px;
+      padding: 14px 36px; display: flex; align-items: center; justify-content: space-between;
     }
-    .header-bar { display: flex; align-items: center; gap: 32px; }
+    .header-bar { display: flex; align-items: center; gap: 28px; }
     .header-left { display: flex; align-items: center; gap: 16px; }
     .logo-img {
       width: 42px; height: 42px; object-fit: contain;
@@ -133,7 +133,7 @@
       display: flex; align-items: center; gap: 8px; cursor: pointer;
       background: rgba(20,40,80,0.5); border: 1px solid rgba(240,160,48,0.3);
       border-radius: 8px; padding: 8px 18px; transition: all 0.2s;
-      font-size: 24px; color: #f0a030; font-weight: 600; letter-spacing: 1px;
+      font-size: 20px; color: #f0a030; font-weight: 600; letter-spacing: 1px;
       white-space: nowrap; flex-shrink: 0;
     }
     .header-meeting-btn:hover { background: rgba(40,80,160,0.3); border-color: #f0a030; transform: translateY(-1px); }
@@ -289,8 +289,8 @@
     /* Mobile */
     @media (max-width: 768px) {
       body { font-size: 13px; }
-      .header { flex-direction: column; padding: 10px 14px; gap: 8px; }
-      .header-left { gap: 10px; justify-content: center; width: 100%; }
+      .header { flex-wrap: wrap; padding: 10px 14px; gap: 8px 24px; }
+      .header-left { gap: 10px; justify-content: center; width: 100%; flex-basis: 100%; }
       .header-left h1 { font-size: 17px; letter-spacing: 1px; }
       .header-title-sub { font-size: 12px; }
       .logo-img { width: 32px; height: 32px; }
@@ -298,8 +298,8 @@
       .header-center .time { font-size: 20px; }
       .header-center .date { font-size: 12px; }
       .header-center .cal-hint { display: none; }
-      .header-bar { display: flex; width: 100%; justify-content: space-evenly; align-items: center; gap: 10px; flex-wrap: nowrap; }
-      .header-right { justify-content: center; gap: 10px; }
+      .header-bar { display: flex; align-items: center; gap: 10px; flex-wrap: nowrap; }
+      .header-right { justify-content: center; gap: 10px; margin-left: auto; }
       .stat-chip .label { font-size: 11px; }
       .stat-chip .value { font-size: 14px; }
       .weather-box { padding: 4px 8px; gap: 5px; }
@@ -399,6 +399,7 @@
     <div class="header-meeting-btn" id="headerMeetingBtn" onclick="toggleMeetings()" title="会议事项 · 点击查看详情">
       <span class="meeting-dot"></span>会议事项<span class="meeting-count" id="meetingCount">9</span> ▾
     </div>
+    </div>
     <div class="header-right">
       <div class="weather-box" id="weatherBox" onclick="toggleForecast()" title="点击查看15日天气预报">
         <div class="weather-icon" id="weatherIcon">⛅</div>
@@ -410,7 +411,6 @@
           </div>
         </div>
       </div>
-    </div>
     </div>
   </div>
 
