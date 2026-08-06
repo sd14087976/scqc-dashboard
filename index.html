@@ -1230,5 +1230,62 @@
       }
     });
   </script>
+  <!-- 微信分享配置 -->
+  <script>
+  (function(){
+    var shareData = {
+      title: '省汽成运 · 董事长数字化看板',
+      desc: '营收概览 · 便民快巴 · 定制客运 · 成运维修 · 物业管理 · 行业新闻监控 · 股东结构',
+      link: window.location.href,
+      imgUrl: 'https://sd14087976.github.io/scqc-dashboard/Logo.png'
+    };
+    function setupShare(bridge) {
+      var events = [
+        ['menu:share:timeline', {title: shareData.title + ' - ' + shareData.desc}],
+        ['menu:share:appmessage', {title: shareData.title, desc: shareData.desc}],
+        ['menu:share:qq', {title: shareData.title, desc: shareData.desc}],
+        ['menu:share:weibo', {title: shareData.title + ' - ' + shareData.desc}],
+        ['menu:share:QZone', {title: shareData.title, desc: shareData.desc}]
+      ];
+      events.forEach(function(ev){
+        bridge.on(ev[0], function(args){
+          var cfg = ev[1];
+          bridge.invoke(ev[0], {
+            title: cfg.title,
+            desc: cfg.desc || shareData.desc,
+            link: shareData.link,
+            imgUrl: shareData.imgUrl,
+            img_width: '200',
+            img_height: '200',
+            success: function(){}
+          }, {});
+        });
+      });
+    }
+    if (typeof WeixinJSBridge !== 'undefined') {
+      setupShare(WeixinJSBridge);
+    } else {
+      document.addEventListener('WeixinJSBridgeReady', function(){ setupShare(WeixinJSBridge); }, false);
+    }
+    // 兼容新版微信
+    if (typeof wx !== 'undefined' && wx.ready) {
+      wx.ready(function(){
+        wx.onMenuShareTimeline({
+          title: shareData.title + ' - ' + shareData.desc,
+          link: shareData.link,
+          imgUrl: shareData.imgUrl,
+          success: function(){}
+        });
+        wx.onMenuShareAppMessage({
+          title: shareData.title,
+          desc: shareData.desc,
+          link: shareData.link,
+          imgUrl: shareData.imgUrl,
+          success: function(){}
+        });
+      });
+    }
+  })();
+  </script>
 </body>
 </html>
