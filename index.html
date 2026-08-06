@@ -400,59 +400,7 @@
   </div>
 
   <div class="main">
-    <!-- Row 1: 股东结构 span2 + 员工概况 -->
-    <div class="card span2">
-      <div class="card-header">
-        <div class="card-title">股东结构</div>
-        <span class="card-badge">数据来源：2026年7月28日股东名册</span>
-      </div>
-      <div class="card-body">
-        <div class="shareholder-kpi-grid" style="grid-template-columns:repeat(4,1fr);">
-          <div class="shareholder-kpi"><div class="num">2,151<span style="font-size:16px">人</span></div><div class="lbl">股东总人数</div></div>
-          <div class="shareholder-kpi"><div class="num">336<span style="font-size:16px">人</span></div><div class="lbl">在岗合计（中高层+科级+员工）</div></div>
-          <div class="shareholder-kpi"><div class="num">1,520<span style="font-size:16px">人</span></div><div class="lbl">退休·退养合计</div></div>
-          <div class="shareholder-kpi"><div class="num">295<span style="font-size:16px">人</span></div><div class="lbl">其他合计（继承+离职+死亡）</div></div>
-        </div>
-        <table class="shareholder-table">
-          <thead><tr><th>类别</th><th style="text-align:right">人数</th><th style="text-align:right">股本（万元）</th><th style="text-align:right">占比</th></tr></thead>
-          <tbody>
-            <tr style="background:rgba(74,144,226,0.08);"><td style="color:#4a90e2;font-weight:600;">中、高层管理人员</td><td style="text-align:right">67</td><td style="text-align:right">2,403.70</td><td style="text-align:right;color:#c0a040">17.40%</td></tr>
-            <tr style="background:rgba(74,144,226,0.04);"><td style="color:#5090c8;">科级管理人员</td><td style="text-align:right">103</td><td style="text-align:right">626.38</td><td style="text-align:right;color:#c0a040">4.53%</td></tr>
-            <tr><td style="color:#5090c8;">员工</td><td style="text-align:right">166</td><td style="text-align:right">579.74</td><td style="text-align:right;color:#c0a040">4.20%</td></tr>
-            <tr style="background:rgba(200,216,248,0.25);"><td style="color:#1e3a6f;font-weight:600;">退休</td><td style="text-align:right">1,504</td><td style="text-align:right">8,913.11</td><td style="text-align:right;color:#c0a040">64.51%</td></tr>
-            <tr style="background:rgba(200,216,248,0.15);"><td style="color:#a0b0d0;">退养</td><td style="text-align:right">16</td><td style="text-align:right">179.80</td><td style="text-align:right;color:#c0a040">1.30%</td></tr>
-            <tr style="background:rgba(160,128,224,0.1);"><td style="color:#b080e0;font-weight:600;">继承</td><td style="text-align:right">133</td><td style="text-align:right">676.16</td><td style="text-align:right;color:#c0a040">4.89%</td></tr>
-            <tr style="background:rgba(224,96,112,0.08);"><td style="color:#e06070;font-weight:600;">离职</td><td style="text-align:right">158</td><td style="text-align:right">431.62</td><td style="text-align:right;color:#c0a040">3.12%</td></tr>
-            <tr style="background:rgba(224,96,112,0.04);"><td style="color:#d08080;">死亡</td><td style="text-align:right">4</td><td style="text-align:right">5.62</td><td style="text-align:right;color:#c0a040">0.04%</td></tr>
-            <tr style="border-top:1px solid rgba(160,190,230,0.6);font-weight:700;"><td style="color:#1e3a6f;">合计</td><td style="text-align:right;color:#1e3a6f;">2,151</td><td style="text-align:right;color:#1e3a6f;">13,816.13</td><td style="text-align:right;color:#c87a10;">100.00%</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-header">
-        <div class="card-title">员工概况</div>
-        <span class="card-badge">在职 1,550 人</span>
-      </div>
-      <div class="card-body">
-        <div class="employee-breakdown">
-          <div class="employee-chart-wrap"><canvas id="employeeChart"></canvas></div>
-          <div class="employee-legend">
-            <div class="employee-legend-item"><span class="employee-legend-dot" style="background:#4a90e2"></span><span class="employee-legend-name">驾驶员</span><span class="employee-legend-val">430人</span></div>
-            <div class="employee-legend-item"><span class="employee-legend-dot" style="background:#c0a040"></span><span class="employee-legend-name">管理人员</span><span class="employee-legend-val">760人</span></div>
-            <div class="employee-legend-item"><span class="employee-legend-dot" style="background:#e06070"></span><span class="employee-legend-name">维修/技术</span><span class="employee-legend-val">230人</span></div>
-            <div class="employee-legend-item"><span class="employee-legend-dot" style="background:#a080d0"></span><span class="employee-legend-name">其他</span><span class="employee-legend-val">130人</span></div>
-          </div>
-        </div>
-        <div style="margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:14px;">
-          <div style="background:rgba(240,246,255,0.75);border-radius:6px;padding:6px 8px;"><span style="color:#5a7090">平均年龄</span><br><span style="color:#2c5aa0;font-weight:700;font-size:18px;">42.3<span style="font-size:13px"> 岁</span></span></div>
-          <div style="background:rgba(240,246,255,0.75);border-radius:6px;padding:6px 8px;"><span style="color:#5a7090">大专以上</span><br><span style="color:#2c5aa0;font-weight:700;font-size:18px;">38.6<span style="font-size:13px">%</span></span></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Row 2: 便民快巴营收 span2 + 运营监控 -->
+<!-- Row 1: 便民快巴营收 span2 + 运营监控 -->
     <div class="card span2">
       <div class="card-header">
         <div class="card-title">便民快巴 · 营收概览</div>
@@ -540,7 +488,136 @@
       </div>
     </div>
 
-    <!-- Row 4: 成运维修营收 + 监控 -->
+        <!-- Row 3: 安全与风险管理 full-row -->
+    <div class="card full-row">
+      <div class="card-header">
+        <div class="card-title">安全与风险管理</div>
+        <span class="card-badge live">实时监控</span>
+      </div>
+      <div class="card-body">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <!-- 事故总览 -->
+          <div style="background:rgba(240,246,255,0.75);border-radius:8px;padding:12px;">
+            <div style="font-size:14px;font-weight:600;color:#2c5aa0;margin-bottom:8px;display:flex;align-items:center;gap:6px;">
+              <span style="font-size:16px;">&#x26A0;</span> 事故总览 · 按等级分类
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;">
+              <div style="text-align:center;background:linear-gradient(180deg,#f0faf4,#e8f5e9);border-radius:6px;padding:10px 6px;border:1px solid rgba(44,168,106,0.15);">
+                <div style="font-size:28px;font-weight:700;color:#2ca86a;">0</div>
+                <div style="font-size:11px;color:#5a7090;margin-top:2px;">一般事故</div>
+              </div>
+              <div style="text-align:center;background:linear-gradient(180deg,#fdfaf0,#faf3e0);border-radius:6px;padding:10px 6px;border:1px solid rgba(192,160,64,0.15);">
+                <div style="font-size:28px;font-weight:700;color:#c0a040;">0</div>
+                <div style="font-size:11px;color:#5a7090;margin-top:2px;">较大事故</div>
+              </div>
+              <div style="text-align:center;background:linear-gradient(180deg,#fef5f6,#fde8ea);border-radius:6px;padding:10px 6px;border:1px solid rgba(224,96,112,0.15);">
+                <div style="font-size:28px;font-weight:700;color:#e06070;">0</div>
+                <div style="font-size:11px;color:#5a7090;margin-top:2px;">重大事故</div>
+              </div>
+            </div>
+            <div style="text-align:center;margin-top:10px;padding:6px;background:linear-gradient(90deg,rgba(44,168,106,0.08),rgba(44,168,106,0.02));border-radius:6px;">
+              <span style="font-size:13px;color:#5a7090;">本年度安全运营 </span>
+              <span style="font-size:18px;font-weight:700;color:#2ca86a;">218</span>
+              <span style="font-size:13px;color:#5a7090;"> 天 · 累计安全里程 </span>
+              <span style="font-size:16px;font-weight:700;color:#2c5aa0;">1,862</span>
+              <span style="font-size:13px;color:#5a7090;"> 万公里</span>
+            </div>
+          </div>
+          <!-- 主动安全监控 -->
+          <div style="background:rgba(240,246,255,0.75);border-radius:8px;padding:12px;">
+            <div style="font-size:14px;font-weight:600;color:#2c5aa0;margin-bottom:8px;">主动安全监控</div>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 10px;background:#fff;border-radius:6px;border-left:3px solid #2ca86a;">
+                <div>
+                  <div style="font-size:12px;color:#1e3a6f;font-weight:600;">ADAS前向碰撞预警</div>
+                  <div style="font-size:10px;color:#5a7090;">今日 3 次 · 均为人车交互</div>
+                </div>
+                <span style="font-size:11px;padding:2px 8px;border-radius:10px;background:#e8f5e9;color:#2ca86a;">正常</span>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 10px;background:#fff;border-radius:6px;border-left:3px solid #4a90e2;">
+                <div>
+                  <div style="font-size:12px;color:#1e3a6f;font-weight:600;">DSM疲劳驾驶监测</div>
+                  <div style="font-size:10px;color:#5a7090;">今日 1 次 · 已干预</div>
+                </div>
+                <span style="font-size:11px;padding:2px 8px;border-radius:10px;background:#e8f5e9;color:#2ca86a;">正常</span>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 10px;background:#fff;border-radius:6px;border-left:3px solid #c0a040;">
+                <div>
+                  <div style="font-size:12px;color:#1e3a6f;font-weight:600;">盲区监测预警</div>
+                  <div style="font-size:10px;color:#5a7090;">今日 5 次</div>
+                </div>
+                <span style="font-size:11px;padding:2px 8px;border-radius:10px;background:#e8f5e9;color:#2ca86a;">正常</span>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 10px;background:#fff;border-radius:6px;border-left:3px solid #e06070;">
+                <div>
+                  <div style="font-size:12px;color:#1e3a6f;font-weight:600;">超速报警</div>
+                  <div style="font-size:10px;color:#5a7090;">今日 0 次超速</div>
+                </div>
+                <span style="font-size:11px;padding:2px 8px;border-radius:10px;background:#e8f5e9;color:#2ca86a;">正常</span>
+              </div>
+            </div>
+          </div>
+          <!-- 隐患排查治理 -->
+          <div style="background:rgba(240,246,255,0.75);border-radius:8px;padding:12px;">
+            <div style="font-size:14px;font-weight:600;color:#2c5aa0;margin-bottom:8px;">隐患排查治理</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
+              <div style="text-align:center;background:#fff;border-radius:6px;padding:10px 6px;">
+                <div style="font-size:22px;font-weight:700;color:#2c5aa0;">186</div>
+                <div style="font-size:11px;color:#5a7090;">本月排查</div>
+              </div>
+              <div style="text-align:center;background:#fff;border-radius:6px;padding:10px 6px;">
+                <div style="font-size:22px;font-weight:700;color:#2ca86a;">178</div>
+                <div style="font-size:11px;color:#5a7090;">已整改</div>
+              </div>
+            </div>
+            <div style="background:#fff;border-radius:6px;padding:10px;">
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px;font-size:12px;">
+                <span style="color:#5a7090;">整改率</span>
+                <span style="font-weight:700;color:#2ca86a;">95.7%</span>
+              </div>
+              <div style="height:6px;background:#e8ecf2;border-radius:3px;overflow:hidden;">
+                <div style="height:100%;width:95.7%;background:linear-gradient(90deg,#2ca86a,#4ac896);border-radius:3px;"></div>
+              </div>
+              <div style="margin-top:8px;font-size:11px;color:#e06070;font-weight:600;">
+                待整改：8 项（其中 2 项超期）
+              </div>
+            </div>
+          </div>
+          <!-- 驾驶员画像 -->
+          <div style="background:rgba(240,246,255,0.75);border-radius:8px;padding:12px;">
+            <div style="font-size:14px;font-weight:600;color:#2c5aa0;margin-bottom:8px;">驾驶员画像</div>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <div style="background:#fff;border-radius:6px;padding:8px 10px;">
+                <div style="font-size:12px;color:#5a7090;margin-bottom:5px;">安全等级分布</div>
+                <div style="display:flex;gap:6px;">
+                  <span style="font-size:11px;padding:2px 8px;border-radius:4px;background:#e8f5e9;color:#2ca86a;font-weight:600;">A 62%</span>
+                  <span style="font-size:11px;padding:2px 8px;border-radius:4px;background:#e5f0ff;color:#4a90e2;font-weight:600;">B 28%</span>
+                  <span style="font-size:11px;padding:2px 8px;border-radius:4px;background:#fdf5e0;color:#c0a040;font-weight:600;">C 8%</span>
+                  <span style="font-size:11px;padding:2px 8px;border-radius:4px;background:#fde8ea;color:#e06070;font-weight:600;">D 2%</span>
+                </div>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+                <div style="background:#fff;border-radius:6px;padding:8px;text-align:center;">
+                  <div style="font-size:11px;color:#5a7090;">在册驾驶员</div>
+                  <div style="font-size:20px;font-weight:700;color:#2c5aa0;">430<span style="font-size:12px;">人</span></div>
+                </div>
+                <div style="background:#fff;border-radius:6px;padding:8px;text-align:center;">
+                  <div style="font-size:11px;color:#5a7090;">月均培训</div>
+                  <div style="font-size:20px;font-weight:700;color:#2c5aa0;">4.2<span style="font-size:12px;">次/人</span></div>
+                </div>
+              </div>
+              <div style="background:#fff;border-radius:6px;padding:8px 10px;font-size:12px;">
+                <span style="color:#5a7090;">需重点关注：</span>
+                <span style="color:#e06070;font-weight:600;">8 人</span>
+                <span style="color:#5a7090;">（D级4人 + 违章未处理4人）</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<!-- Row 4: 成运维修营收 + 监控 -->
     <div class="card span2">
       <div class="card-header">
         <div class="card-title">成运维修 · 营收概览</div>
@@ -606,6 +683,58 @@
         <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:14px;">
           <div style="background:rgba(240,246,255,0.75);border-radius:6px;padding:8px 10px;"><span style="color:#5a7090">商业租赁</span><br><span style="color:#9a7a20;font-weight:700;font-size:20px;">52<span style="font-size:13px">%</span></span></div>
           <div style="background:rgba(240,246,255,0.75);border-radius:6px;padding:8px 10px;"><span style="color:#5a7090">本月新增</span><br><span style="color:#2ca86a;font-weight:700;font-size:20px;">3<span style="font-size:13px"> 户</span></span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 1: 股东结构 span2 + 员工概况 -->
+    <div class="card span2">
+      <div class="card-header">
+        <div class="card-title">股东结构</div>
+        <span class="card-badge">数据来源：2026年7月28日股东名册</span>
+      </div>
+      <div class="card-body">
+        <div class="shareholder-kpi-grid" style="grid-template-columns:repeat(4,1fr);">
+          <div class="shareholder-kpi"><div class="num">2,151<span style="font-size:16px">人</span></div><div class="lbl">股东总人数</div></div>
+          <div class="shareholder-kpi"><div class="num">336<span style="font-size:16px">人</span></div><div class="lbl">在岗合计（中高层+科级+员工）</div></div>
+          <div class="shareholder-kpi"><div class="num">1,520<span style="font-size:16px">人</span></div><div class="lbl">退休·退养合计</div></div>
+          <div class="shareholder-kpi"><div class="num">295<span style="font-size:16px">人</span></div><div class="lbl">其他合计（继承+离职+死亡）</div></div>
+        </div>
+        <table class="shareholder-table">
+          <thead><tr><th>类别</th><th style="text-align:right">人数</th><th style="text-align:right">股本（万元）</th><th style="text-align:right">占比</th></tr></thead>
+          <tbody>
+            <tr style="background:rgba(74,144,226,0.08);"><td style="color:#4a90e2;font-weight:600;">中、高层管理人员</td><td style="text-align:right">67</td><td style="text-align:right">2,403.70</td><td style="text-align:right;color:#c0a040">17.40%</td></tr>
+            <tr style="background:rgba(74,144,226,0.04);"><td style="color:#5090c8;">科级管理人员</td><td style="text-align:right">103</td><td style="text-align:right">626.38</td><td style="text-align:right;color:#c0a040">4.53%</td></tr>
+            <tr><td style="color:#5090c8;">员工</td><td style="text-align:right">166</td><td style="text-align:right">579.74</td><td style="text-align:right;color:#c0a040">4.20%</td></tr>
+            <tr style="background:rgba(200,216,248,0.25);"><td style="color:#1e3a6f;font-weight:600;">退休</td><td style="text-align:right">1,504</td><td style="text-align:right">8,913.11</td><td style="text-align:right;color:#c0a040">64.51%</td></tr>
+            <tr style="background:rgba(200,216,248,0.15);"><td style="color:#a0b0d0;">退养</td><td style="text-align:right">16</td><td style="text-align:right">179.80</td><td style="text-align:right;color:#c0a040">1.30%</td></tr>
+            <tr style="background:rgba(160,128,224,0.1);"><td style="color:#b080e0;font-weight:600;">继承</td><td style="text-align:right">133</td><td style="text-align:right">676.16</td><td style="text-align:right;color:#c0a040">4.89%</td></tr>
+            <tr style="background:rgba(224,96,112,0.08);"><td style="color:#e06070;font-weight:600;">离职</td><td style="text-align:right">158</td><td style="text-align:right">431.62</td><td style="text-align:right;color:#c0a040">3.12%</td></tr>
+            <tr style="background:rgba(224,96,112,0.04);"><td style="color:#d08080;">死亡</td><td style="text-align:right">4</td><td style="text-align:right">5.62</td><td style="text-align:right;color:#c0a040">0.04%</td></tr>
+            <tr style="border-top:1px solid rgba(160,190,230,0.6);font-weight:700;"><td style="color:#1e3a6f;">合计</td><td style="text-align:right;color:#1e3a6f;">2,151</td><td style="text-align:right;color:#1e3a6f;">13,816.13</td><td style="text-align:right;color:#c87a10;">100.00%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">员工概况</div>
+        <span class="card-badge">在职 1,550 人</span>
+      </div>
+      <div class="card-body">
+        <div class="employee-breakdown">
+          <div class="employee-chart-wrap"><canvas id="employeeChart"></canvas></div>
+          <div class="employee-legend">
+            <div class="employee-legend-item"><span class="employee-legend-dot" style="background:#4a90e2"></span><span class="employee-legend-name">驾驶员</span><span class="employee-legend-val">430人</span></div>
+            <div class="employee-legend-item"><span class="employee-legend-dot" style="background:#c0a040"></span><span class="employee-legend-name">管理人员</span><span class="employee-legend-val">760人</span></div>
+            <div class="employee-legend-item"><span class="employee-legend-dot" style="background:#e06070"></span><span class="employee-legend-name">维修/技术</span><span class="employee-legend-val">230人</span></div>
+            <div class="employee-legend-item"><span class="employee-legend-dot" style="background:#a080d0"></span><span class="employee-legend-name">其他</span><span class="employee-legend-val">130人</span></div>
+          </div>
+        </div>
+        <div style="margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:14px;">
+          <div style="background:rgba(240,246,255,0.75);border-radius:6px;padding:6px 8px;"><span style="color:#5a7090">平均年龄</span><br><span style="color:#2c5aa0;font-weight:700;font-size:18px;">42.3<span style="font-size:13px"> 岁</span></span></div>
+          <div style="background:rgba(240,246,255,0.75);border-radius:6px;padding:6px 8px;"><span style="color:#5a7090">大专以上</span><br><span style="color:#2c5aa0;font-weight:700;font-size:18px;">38.6<span style="font-size:13px">%</span></span></div>
         </div>
       </div>
     </div>
