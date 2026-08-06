@@ -119,17 +119,17 @@
     .header-right { display: flex; gap: 22px; align-items: center; }
     <!-- Meeting button in header -->
     .header-meeting-btn {
-      display: flex; align-items: center; gap: 6px; cursor: pointer;
+      display: flex; align-items: center; gap: 8px; cursor: pointer;
       background: rgba(20,40,80,0.5); border: 1px solid rgba(240,160,48,0.3);
-      border-radius: 8px; padding: 6px 16px; transition: all 0.2s;
-      font-size: 14px; color: #f0a030; font-weight: 600; letter-spacing: 1px;
+      border-radius: 8px; padding: 8px 18px; transition: all 0.2s;
+      font-size: 16px; color: #f0a030; font-weight: 600; letter-spacing: 1px;
       white-space: nowrap; flex-shrink: 0;
     }
     .header-meeting-btn:hover { background: rgba(40,80,160,0.3); border-color: #f0a030; transform: translateY(-1px); }
     .header-meeting-btn .meeting-dot { width: 8px; height: 8px; border-radius: 50%; background: #f0a030; animation: pulse 2s infinite; }
     .header-meeting-btn .meeting-count { display: inline-flex; align-items: center; justify-content: center;
-      background: #e04040; color: #fff; font-size: 12px; font-weight: 700; min-width: 22px;
-      height: 18px; border-radius: 9px; padding: 0 6px; margin-left: 2px; }
+      background: #e04040; color: #fff; font-size: 13px; font-weight: 700; min-width: 24px;
+      height: 20px; border-radius: 10px; padding: 0 7px; margin-left: 3px; }
     /* Meeting Overlay */
     .meeting-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); z-index: 1000; justify-content: center; align-items: center; }
     .meeting-overlay.show { display: flex; }
@@ -146,16 +146,18 @@
     .m-item.urgent { border-left: 3px solid #e04040; }
     .m-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
     .m-dot.meeting { background: #4a90e2; }
-    .m-dot.event { background: #f0a030; }
-    .m-dot.deadline { background: #e04040; }
+    .m-dot.party { background: #e04040; }
+    .m-dot.training { background: #2ecc71; }
+    .m-dot.deadline { background: #f0a030; }
     .m-date { font-size: 14px; color: #8aa0c8; min-width: 56px; font-weight: 600; }
     .m-body { flex: 1; min-width: 0; }
     .m-title { font-size: 15px; color: #c0d8ff; font-weight: 600; }
     .m-info { font-size: 12px; color: #5a7090; margin-top: 2px; }
     .m-tag { font-size: 11px; padding: 2px 8px; border-radius: 4px; flex-shrink: 0; }
     .m-tag.meeting { background: rgba(74,144,226,0.2); color: #4a90e2; }
-    .m-tag.event { background: rgba(240,160,48,0.2); color: #f0a030; }
-    .m-tag.deadline { background: rgba(224,64,64,0.2); color: #e04040; }
+    .m-tag.party { background: rgba(224,64,64,0.2); color: #e04040; }
+    .m-tag.training { background: rgba(46,204,113,0.2); color: #2ecc71; }
+    .m-tag.deadline { background: rgba(240,160,48,0.2); color: #f0a030; }
     .stat-chip { text-align: right; }
     .stat-chip .label { font-size: 13px; color: #5a70a0; letter-spacing: 1px; }
     .stat-chip .value { font-size: 18px; font-weight: 700; color: #a0bcf0; }
@@ -795,17 +797,20 @@
 
     // ===== Meeting Reminders Data (must be defined BEFORE rendering) =====
     var meetingReminders = [
-      {date:'8月5日', title:'月度经营分析会', info:'第二会议室 · 全体高管', tag:'meeting', urgent:true},
-      {date:'8月5日', title:'安全生产专项检查', info:'城北客运站现场检查', tag:'event', urgent:true},
-      {date:'8月8日', title:'便民快巴运营周会', info:'5条线路数据复盘', tag:'meeting', urgent:false},
-      {date:'8月10日', title:'驾驶员安全培训考核', info:'年度安全考核截止', tag:'deadline', urgent:false},
-      {date:'8月12日', title:'新能源车辆采购评审', info:'30辆纯电动客车评标', tag:'event', urgent:false},
-      {date:'8月15日', title:'半年度经营报告提交', info:'向国资委提交报告', tag:'deadline', urgent:false},
-      {date:'8月18日', title:'股东名册月度更新', info:'更新7月股东变动', tag:'event', urgent:false},
-      {date:'8月22日', title:'季度董事会', info:'审议Q3财务及投资', tag:'meeting', urgent:false},
-      {date:'8月25日', title:'8月营收结算', info:'各线路营收汇总', tag:'deadline', urgent:false}
+      {date:'8月6日', title:'党委理论学习中心组学习', info:'党委会议室 · 学习二十届三中全会精神', tag:'party', urgent:true},
+      {date:'8月7日', title:'月度经营分析会', info:'第二会议室 · 全体高管及部门负责人', tag:'meeting', urgent:true},
+      {date:'8月8日', title:'安全生产专题培训', info:'城北客运站 · 全体驾驶员安全警示教育', tag:'training', urgent:true},
+      {date:'8月11日', title:'党支部主题党日活动', info:'各支部自行组织 · 8月主题学习', tag:'party', urgent:false},
+      {date:'8月12日', title:'便民快巴运营周会', info:'5条线路运营数据复盘与优化', tag:'meeting', urgent:false},
+      {date:'8月14日', title:'驾驶员安全培训考核', info:'年度安全知识考核截止提交', tag:'training', urgent:false},
+      {date:'8月15日', title:'半年度经营报告提交', info:'向交通运输局报送半年度经营数据', tag:'deadline', urgent:false},
+      {date:'8月18日', title:'入党积极分子培训班', info:'公司党校 · 2026年第3期开班', tag:'party', urgent:false},
+      {date:'8月20日', title:'新能源车辆采购评审会', info:'30辆纯电动客车评标 · 招标会议室', tag:'meeting', urgent:false},
+      {date:'8月22日', title:'季度董事会', info:'审议Q3财务报告及投资计划', tag:'meeting', urgent:false},
+      {date:'8月25日', title:'组织生活会', info:'各支部 · 批评与自我批评', tag:'party', urgent:false},
+      {date:'8月27日', title:'8月营收结算', info:'各线路营收数据汇总截止', tag:'deadline', urgent:false}
     ];
-    var tagNames = {meeting:'会议', event:'事项', deadline:'截止'};
+    var tagNames = {meeting:'重要会议', party:'党建活动', training:'培训考核', deadline:'截止提醒'};
     renderMeetingCount();
 
     // Chengdu weather (Open-Meteo free API)
